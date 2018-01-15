@@ -1,0 +1,6 @@
+# IntelliJ IDEA
+/.idea/
+/cabbage-main.iml
+
+# Gradle
+/.gradle
