@@ -22,10 +22,10 @@ class CreateAnAccount implements Task {
     @Override
     def <T extends Actor> void performAs(T restClient) {
         restClient.attemptsTo(
-                Post.toPath("/Seattle")
+                Post.toPath("/accounts")
                     .withQueryParameter("time", "evening")
                     .withContentType(ContentType.JSON)
-                    .withExpectedStatusCode(HttpStatus.SC_OK)
+                    .withExpectedStatusCode(HttpStatus.SC_CREATED)
         );
 //        Account account = new Account(name: accountName)
     }

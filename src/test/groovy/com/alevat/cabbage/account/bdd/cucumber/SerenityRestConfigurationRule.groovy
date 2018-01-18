@@ -6,7 +6,7 @@ import org.junit.rules.ExternalResource
 
 class SerenityRestConfigurationRule extends ExternalResource {
 
-    private final String baseURI = "https://lambda.aws.alevat.com"
+    private final String baseURI = "https://accounts-api-test.cabbage.aws.alevat.com/v1"
 
     @Override
     protected void before() throws Throwable {
