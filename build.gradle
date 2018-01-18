@@ -17,8 +17,11 @@ buildscript {
     }
 }
 
-// In this section you declare the dependencies for your production and test code
 dependencies {
+
+    compile libs.aws.lambda.core,
+            libs.aws.lambda.events,
+            libs.apache.http.core
 
     testCompile libs.test.serenity.core,
             libs.test.serenity.screenplay,
@@ -28,6 +31,15 @@ dependencies {
             libs.test.junit,
             libs.test.assertj
 }
+
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtime
+    }
+}
+build.dependsOn buildZip
 
 test {
     testLogging.showStandardStreams = true
