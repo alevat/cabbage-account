@@ -13,7 +13,7 @@ class TransactionsStepDefinitions {
 
     static final String TEST_ACCOUNT_NAME = "test"
 
-    def theClient = Actor.named("client")
+    def theClient = Actor.named("Account microservice REST client")
 
     @Before
     def "Set the stage"() {
