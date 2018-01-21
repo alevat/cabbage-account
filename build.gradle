@@ -81,10 +81,20 @@ task buildZip(type: Zip) {
 
 build.dependsOn buildZip
 
+task copyTestDependencies(type: Copy) {
+    from configurations.testCompile
+    include '*.dll'
+    include '*.so'
+    include '*.dylib'
+    into "${buildDir}/libs/native"
+}
+
 test {
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
 }
+
+test.dependsOn copyTestDependencies
 
 gradle.startParameter.continueOnFailure = true
 
