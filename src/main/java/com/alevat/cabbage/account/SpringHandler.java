@@ -8,12 +8,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class SpringHandler extends SpringRequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    private static final ApplicationContext context =
+    private static final ApplicationContext CONTEXT =
             new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
     @Override
     public ApplicationContext getApplicationContext() {
-        return null;
+        return CONTEXT;
     }
 
 }
