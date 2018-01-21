@@ -7,7 +7,7 @@ class TransactionsStepImplementations {
 
     static final String TEST_ACCOUNT_NAME = "test-account"
 
-    def theClient = Actor.named("Account microservice REST client")
+    def theClient = Actor.named("AccountDTO microservice REST client")
 
     def "I have an account"() {
         theClient.wasAbleTo(CreateAnAccount.named(TEST_ACCOUNT_NAME))

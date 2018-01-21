@@ -1,6 +1,6 @@
 package com.alevat.cabbage.account.bdd.screenplay.tasks
 
-import com.alevat.cabbage.account.service.dto.Account
+import com.alevat.cabbage.account.service.dto.AccountDTO
 import net.serenitybdd.screenplay.Actor
 import net.serenitybdd.screenplay.Interaction
 import net.serenitybdd.screenplay.Question
@@ -13,7 +13,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented
 class TheCurrentAccount implements Interaction {
 
     @Delegate
-    private static Account currentAccount
+    private static AccountDTO currentAccount
 
     static TheCurrentAccount load() {
         return instrumented(TheCurrentAccount)
@@ -32,7 +32,7 @@ class TheCurrentAccount implements Interaction {
     @Override
     @Step("{0} extracts the current account from the REST response body")
     <T extends Actor> void performAs(T actor) {
-        currentAccount = then().extract().body().as(Account)
+        currentAccount = then().extract().body().as(AccountDTO)
     }
 
 }

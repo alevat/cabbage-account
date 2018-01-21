@@ -1,7 +1,7 @@
 package com.alevat.cabbage.account;
 
 import com.alevat.cabbage.account.service.AccountService;
-import com.alevat.cabbage.account.service.dto.Account;
+import com.alevat.cabbage.account.service.dto.AccountDTO;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
@@ -46,7 +46,7 @@ public class AccountMicroserviceRequestHandler
     }
 
     private APIGatewayProxyResponseEvent handlePost(APIGatewayProxyRequestEvent requestEvent, Context context) {
-        Account account = getFromBody(requestEvent, Account.class);
+        AccountDTO account = getFromBody(requestEvent, AccountDTO.class);
         account = accountService.create(account);
         return new APIGatewayProxyResponseEvent()
                 .withBody(toJson(account))

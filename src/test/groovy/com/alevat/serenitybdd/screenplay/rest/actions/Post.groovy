@@ -1,6 +1,5 @@
 package com.alevat.serenitybdd.screenplay.rest.actions
 
-import com.alevat.cabbage.account.service.dto.Account
 import io.restassured.http.ContentType
 import net.serenitybdd.screenplay.Actor
 import net.serenitybdd.screenplay.Interaction

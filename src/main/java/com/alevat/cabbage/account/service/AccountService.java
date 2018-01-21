@@ -1,9 +1,9 @@
 package com.alevat.cabbage.account.service;
 
-import com.alevat.cabbage.account.service.dto.Account;
+import com.alevat.cabbage.account.service.dto.AccountDTO;
 
 public interface AccountService {
 
-    Account create(Account account);
+    AccountDTO create(AccountDTO account);
 
 }

@@ -2,7 +2,7 @@ package com.alevat.cabbage.account.service.dto;
 
 import java.util.UUID;
 
-public class Account {
+public class AccountDTO {
 
     private UUID id;
     private String name;
