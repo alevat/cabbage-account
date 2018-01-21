@@ -5,7 +5,7 @@ import net.serenitybdd.screenplay.Actor
 
 class TransactionsStepImplementations {
 
-    static final String TEST_ACCOUNT_NAME = "Hello there!"
+    static final String TEST_ACCOUNT_NAME = "test-account"
 
     def theClient = Actor.named("Account microservice REST client")
 

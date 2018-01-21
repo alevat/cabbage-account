@@ -42,7 +42,10 @@ dependencies {
 
     compile libs.aws.lambda.core,
             libs.aws.lambda.events,
-            libs.apache.http.core
+            libs.apache.http.core,
+            libs.javax.inject,
+            libs.spring.core,
+            libs.spring.context
 
     testCompile libs.test.serenity.core,
             libs.test.serenity.screenplay,

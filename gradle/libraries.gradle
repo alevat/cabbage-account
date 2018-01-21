@@ -8,6 +8,8 @@ ext {
     awsLambdaCoreVersion='1.2.0'
     awsLambdaEventsVersion='2.0.2'
     apacheHttpComponetsCoreVersion='4.4.8'
+    springBootVersion='1.5.9.RELEASE'
+    springVersion='5.0.2.RELEASE'
 
     libs = [
             slf4jApi: "org.slf4j:slf4j-api:$slf4jVersion",
@@ -27,9 +29,15 @@ ext {
                     ]
             ],
 
+            javax: [
+                    inject: "javax.inject:javax.inject:1"
+            ],
+
             spring: [
+                    core: "org.springframework:spring-core:${springVersion}",
+                    context: "org.springframework:spring-context:${springVersion}",
                     boot: [
-                            web: "org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE"
+                            web: "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
                     ]
             ],
 
@@ -43,7 +51,7 @@ ext {
                             spring: "net.serenity-bdd:serenity-spring:${serenityCoreVersion}"
                     ],
                     spring: [
-                            boot: "org.springframework.boot:spring-boot-starter-test:1.5.9.RELEASE"
+                            boot: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
                     ],
                     junit: "junit:junit:${junitVersion}",
                     assertj: "org.assertj:assertj-core:${assertJVersion}"
