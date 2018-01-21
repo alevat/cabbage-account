@@ -10,6 +10,7 @@ ext {
     apacheHttpComponetsCoreVersion='4.4.8'
     springBootVersion='1.5.9.RELEASE'
     springVersion='5.0.2.RELEASE'
+    springAwsLambdaVersion='1.1.0'
 
     libs = [
             slf4jApi: "org.slf4j:slf4j-api:$slf4jVersion",
@@ -38,7 +39,8 @@ ext {
                     context: "org.springframework:spring-context:${springVersion}",
                     boot: [
                             web: "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-                    ]
+                    ],
+                    awsLambda: "me.ccampo:spring-aws-lambda:${springAwsLambdaVersion}"
             ],
 
             test: [

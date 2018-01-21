@@ -23,7 +23,7 @@ class TheCurrentAccount implements Interaction {
             @Override
             @Subject("the account name")
             String answeredBy(Actor actor) {
-                return currentAccount.message
+                return currentAccount.name
             }
         };
     }
