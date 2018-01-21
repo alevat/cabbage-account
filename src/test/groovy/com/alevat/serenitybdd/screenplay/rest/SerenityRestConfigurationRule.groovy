@@ -1,4 +1,4 @@
-package com.alevat.cabbage.account.bdd.cucumber
+package com.alevat.serenitybdd.screenplay.rest
 
 import io.restassured.RestAssured
 import net.serenitybdd.rest.RestDefaultsChained

@@ -1,7 +1,8 @@
-package com.alevat.cabbage.account.bdd.cucumber
+package com.alevat.cabbage.account.bdd.cucumber.remote
 
 import com.alevat.aws.lambda.test.SpringBootLambdaProxy
 import com.alevat.boottest.TestConfig
+import com.alevat.serenitybdd.screenplay.rest.SerenityRestConfigurationRule
 import cucumber.api.CucumberOptions
 import net.serenitybdd.cucumber.CucumberWithSerenity
 import org.junit.ClassRule

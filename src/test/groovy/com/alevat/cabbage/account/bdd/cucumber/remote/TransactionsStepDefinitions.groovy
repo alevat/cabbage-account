@@ -1,4 +1,4 @@
-package com.alevat.cabbage.account.bdd.cucumber
+package com.alevat.cabbage.account.bdd.cucumber.remote
 
 import com.alevat.cabbage.account.bdd.screenplay.tasks.CreateAnAccount
 import cucumber.api.java.Before
