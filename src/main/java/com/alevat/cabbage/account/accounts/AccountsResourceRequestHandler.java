@@ -21,7 +21,7 @@ public class AccountsResourceRequestHandler
 
     private APIGatewayProxyResponseEvent handlePost(APIGatewayProxyRequestEvent requestEvent, Context context) {
         return new APIGatewayProxyResponseEvent()
-                .withBody("{message: \"Hello there!\"}")
+                .withBody("{\"message\": \"Hello there!\"}")
                 .withStatusCode(HttpStatus.SC_CREATED);
     }
 

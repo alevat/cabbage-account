@@ -1,4 +1,4 @@
-ext{
+ext {
     slf4jVersion = '1.7.7'
     serenityCoreVersion = '1.8.21'
     serenityCucumberVersion = '1.6.9'
@@ -27,13 +27,23 @@ ext{
                     ]
             ],
 
+            spring: [
+                    boot: [
+                            web: "org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE"
+                    ]
+            ],
+
             test: [
                     serenity: [
                             core: "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
                             screenplay: "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
-                            screenplayWebdriver: "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+                            screenplayWebdriver: "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
                             cucumber: "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}",
-                            restAssured: "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}"
+                            restAssured: "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}",
+                            spring: "net.serenity-bdd:serenity-spring:${serenityCoreVersion}"
+                    ],
+                    spring: [
+                            boot: "org.springframework.boot:spring-boot-starter-test:1.5.9.RELEASE"
                     ],
                     junit: "junit:junit:${junitVersion}",
                     assertj: "org.assertj:assertj-core:${assertJVersion}"

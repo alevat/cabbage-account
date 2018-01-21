@@ -1,20 +1,24 @@
+buildscript {
+
+    repositories {
+        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:1.8.1"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'net.serenity-bdd.aggregator'
 apply from: "$rootDir/gradle/libraries.gradle"
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'net.serenity-bdd.aggregator'
 
 repositories {
     jcenter()
-}
-
-buildscript {
-    repositories {
-        mavenLocal()
-        jcenter()
-    }
-    dependencies {
-        classpath("net.serenity-bdd:serenity-gradle-plugin:1.8.1")
-    }
 }
 
 dependencies {
@@ -25,11 +29,13 @@ dependencies {
 
     testCompile libs.test.serenity.core,
             libs.test.serenity.screenplay,
-            libs.test.serenity.screenplayWebdriver,
             libs.test.serenity.cucumber,
             libs.test.serenity.restAssured,
+            libs.test.serenity.spring,
             libs.test.junit,
-            libs.test.assertj
+            libs.test.assertj,
+            libs.test.spring.boot,
+            libs.spring.boot.web
 }
 
 task buildZip(type: Zip) {
