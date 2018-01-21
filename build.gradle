@@ -92,6 +92,7 @@ task copyTestDependencies(type: Copy) {
 test {
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
+    environment "STAGE", "local"
 }
 
 test.dependsOn copyTestDependencies
