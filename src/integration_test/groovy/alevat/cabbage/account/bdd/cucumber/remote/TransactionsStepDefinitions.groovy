@@ -1,4 +1,4 @@
-package com.alevat.cabbage.account.bdd.cucumber.remote
+package alevat.cabbage.account.bdd.cucumber.remote
 
 import com.alevat.cabbage.account.bdd.cucumber.steps.TransactionsStepImplementations
 import cucumber.api.java.en.Given

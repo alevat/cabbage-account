@@ -21,6 +21,23 @@ repositories {
     jcenter()
 }
 
+sourceSets {
+    integration_test {
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
+}
+
+configurations {
+    integration_testCompile.extendsFrom testCompile
+    integration_testRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integration_test.output.classesDirs
+    classpath = sourceSets.integration_test.runtimeClasspath
+}
+
 dependencies {
 
     compile libs.aws.lambda.core,

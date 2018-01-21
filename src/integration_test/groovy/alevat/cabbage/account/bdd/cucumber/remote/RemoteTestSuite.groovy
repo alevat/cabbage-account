@@ -1,4 +1,4 @@
-package com.alevat.cabbage.account.bdd.cucumber.remote
+package alevat.cabbage.account.bdd.cucumber.remote
 
 import com.alevat.serenitybdd.screenplay.rest.SerenityRestConfigurationRule
 import cucumber.api.CucumberOptions
