@@ -18,7 +18,7 @@ import javax.inject.Inject
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 
 @SpringBootTest(webEnvironment = RANDOM_PORT, classes = SpringBootLambdaProxy)
-@ContextConfiguration(classes = [ApplicationConfiguration, TestConfig])
+@ContextConfiguration(classes = ApplicationConfiguration)
 class SpringBootTransactionsStepDefinitions {
 
     @Steps
