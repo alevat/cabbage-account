@@ -19,6 +19,7 @@ apply plugin: 'net.serenity-bdd.aggregator'
 
 repositories {
     jcenter()
+    maven {url 'https://s3-us-west-2.amazonaws.com/dynamodb-local/release'}
 }
 
 sourceSets {
@@ -40,7 +41,14 @@ task integrationTest(type: Test) {
 
 dependencies {
 
+    dependencyManagement {
+        imports {
+            mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.268'
+        }
+    }
+
     compile libs.apache.http.core,
+            libs.aws.dynamodb,
             libs.aws.lambda.core,
             libs.aws.lambda.events,
             libs.jackson.annotations,
@@ -59,6 +67,7 @@ dependencies {
             libs.test.junit,
             libs.test.assertj,
             libs.test.spring.boot,
+            libs.aws.dynamodbLocal,
             libs.spring.boot.web
 }
 

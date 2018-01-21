@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 
 @Component
-public class AccountsResourceRequestHandler
+public class AccountMicroserviceRequestHandler
         implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     @Inject

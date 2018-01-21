@@ -12,6 +12,7 @@ ext {
     springAwsLambdaVersion='1.1.0'
     springBootVersion='1.5.9.RELEASE'
     springVersion='5.0.2.RELEASE'
+    dynamoDbLocalVersion='1.11.86'
 
     libs = [
             slf4jApi: "org.slf4j:slf4j-api:$slf4jVersion",
@@ -20,11 +21,12 @@ ext {
             apache: [
                     http: [
                             core: "org.apache.httpcomponents:httpcore:${apacheHttpComponetsCoreVersion}"
-
                     ]
             ],
 
             aws: [
+                    dynamodb: "com.amazonaws:aws-java-sdk-dynamodb",
+                    dynamodbLocal: "com.amazonaws:DynamoDBLocal:${dynamoDbLocalVersion}",
                     lambda: [
                             core: "com.amazonaws:aws-lambda-java-core:${awsLambdaCoreVersion}",
                             events: "com.amazonaws:aws-lambda-java-events:${awsLambdaEventsVersion}"
