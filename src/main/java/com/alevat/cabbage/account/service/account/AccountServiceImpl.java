@@ -11,7 +11,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account create(Account account) {
-        account.setUuid(UUID.randomUUID());
+        account.setId(UUID.randomUUID());
         return account;
     }
 

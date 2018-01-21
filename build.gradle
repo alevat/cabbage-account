@@ -40,9 +40,12 @@ task integrationTest(type: Test) {
 
 dependencies {
 
-    compile libs.aws.lambda.core,
+    compile libs.apache.http.core,
+            libs.aws.lambda.core,
             libs.aws.lambda.events,
-            libs.apache.http.core,
+            libs.jackson.annotations,
+            libs.jackson.core,
+            libs.jackson.databind,
             libs.javax.inject,
             libs.spring.core,
             libs.spring.context,

@@ -1,5 +1,6 @@
 package com.alevat.cabbage.account.bdd.screenplay.tasks
 
+import com.alevat.cabbage.account.service.dto.Account
 import net.serenitybdd.screenplay.Actor
 import net.serenitybdd.screenplay.Interaction
 import net.serenitybdd.screenplay.Question
