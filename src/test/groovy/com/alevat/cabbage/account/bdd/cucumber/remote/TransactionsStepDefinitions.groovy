@@ -1,38 +1,29 @@
 package com.alevat.cabbage.account.bdd.cucumber.remote
 
-import com.alevat.cabbage.account.bdd.screenplay.tasks.CreateAnAccount
-import cucumber.api.java.Before
+import com.alevat.cabbage.account.bdd.cucumber.steps.TransactionsStepImplementations
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
-import net.serenitybdd.screenplay.Actor
-import net.serenitybdd.screenplay.actors.OnStage
-import net.serenitybdd.screenplay.actors.OnlineCast
+import net.thucydides.core.annotations.Steps
 
 class TransactionsStepDefinitions {
 
-    static final String TEST_ACCOUNT_NAME = "Hello there!"
-
-    def theClient = Actor.named("Account microservice REST client")
-
-    @Before
-    def "Set the stage"() {
-        OnStage.setTheStage(new OnlineCast());
-    }
+    @Steps
+    TransactionsStepImplementations implementations
 
     @Given("^I have an account")
-    def "I have an account"() {
-        theClient.wasAbleTo(CreateAnAccount.named(TEST_ACCOUNT_NAME))
+    def "I have an account"()  {
+        implementations."I have an account"()
     }
 
     @When("^I post a transaction to an account")
     def "I post a transaction to an account"() {
-//        theClient.attemptsTo(PostATransaction.with(details).toAccount(TEST_ACCOUNT_NAME));
+        implementations."I post a transaction to an account"()
     }
 
     @Then("^the transaction should be listed in the account's ledger")
     def "the transaction should be listed in the account's ledger"() {
-
+        implementations."the transaction should be listed in the account's ledger"()
     }
 
 }

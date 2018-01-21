@@ -1,4 +1,4 @@
-package com.alevat.boottest
+package com.alevat.cabbage.account.bdd.cucumber.springboot
 
 import com.alevat.cabbage.account.accounts.AccountsResourceRequestHandler
 import com.amazonaws.services.lambda.runtime.RequestHandler
