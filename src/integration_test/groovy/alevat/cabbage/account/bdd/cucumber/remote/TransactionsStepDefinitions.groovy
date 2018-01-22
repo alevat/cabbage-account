@@ -12,18 +12,18 @@ class TransactionsStepDefinitions {
     TransactionsStepImplementations implementations
 
     @Given("^I have an account")
-    def "I have an account"()  {
-        implementations."I have an account"()
+    def iHaveAnAccount()  {
+        implementations.iHaveAnAccount()
     }
 
-    @When("^I post a transaction to an account")
-    def "I post a transaction to an account"() {
-        implementations."I post a transaction to an account"()
+    @When("^I post a transaction to an account with the amount <amount>")
+    def iPostATransactionWith(BigDecimal amount) {
+        implementations.iPostATransactionWith(amount)
     }
 
     @Then("^the transaction should be listed in the account's ledger")
-    def "the transaction should be listed in the account's ledger"() {
-        implementations."the transaction should be listed in the account's ledger"()
+    def theTransactionShouldBeListed() {
+        implementations.theTransactionShouldBeListed()
     }
 
 }

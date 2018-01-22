@@ -3,6 +3,8 @@ ext {
     assertJVersion='3.8.0'
     awsLambdaCoreVersion='1.2.0'
     awsLambdaEventsVersion='2.0.2'
+    dynamoDbLocalVersion='1.11.86'
+    googleGuavaVersion='23.6-jre'
     jacksonVersion='2.9.3'
     junitVersion='4.12'
     logbackVersion='1.2.3'
@@ -12,7 +14,6 @@ ext {
     springAwsLambdaVersion='1.1.0'
     springBootVersion='1.5.9.RELEASE'
     springVersion='5.0.2.RELEASE'
-    dynamoDbLocalVersion='1.11.86'
 
     libs = [
             slf4jApi: "org.slf4j:slf4j-api:$slf4jVersion",
@@ -32,6 +33,8 @@ ext {
                             events: "com.amazonaws:aws-lambda-java-events:${awsLambdaEventsVersion}"
                     ]
             ],
+
+            guava: "com.google.guava:guava:${googleGuavaVersion}",
 
             jackson: [
                     annotations: "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
