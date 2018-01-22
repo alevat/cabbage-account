@@ -13,10 +13,10 @@ import static net.serenitybdd.screenplay.Tasks.instrumented
 class TheCurrentAccount implements Interaction {
 
     @Delegate
-    private static AccountDTO currentAccount
+    private static AccountDTO account
 
     static boolean exists() {
-        return currentAccount != null
+        return account != null
     }
 
     static TheCurrentAccount load() {
@@ -28,15 +28,15 @@ class TheCurrentAccount implements Interaction {
             @Override
             @Subject("the account name")
             String answeredBy(Actor actor) {
-                return currentAccount.name
+                return account.name
             }
         };
     }
 
     @Override
-    @Step("{0} extracts the current account from the REST response body")
+    @Step("{0} extracts the account from the REST response body")
     <T extends Actor> void performAs(T actor) {
-        currentAccount = then().extract().body().as(AccountDTO)
+        account = then().extract().body().as(AccountDTO)
     }
 
 }
