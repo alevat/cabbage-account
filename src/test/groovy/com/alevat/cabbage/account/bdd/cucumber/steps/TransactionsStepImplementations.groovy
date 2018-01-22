@@ -1,10 +1,10 @@
 package com.alevat.cabbage.account.bdd.cucumber.steps
 
 import com.alevat.cabbage.account.bdd.screenplay.tasks.CreateAnAccount
-import com.alevat.cabbage.account.bdd.screenplay.tasks.PostATransaction
+import com.alevat.cabbage.account.bdd.screenplay.tasks.TheCurrentAccount
 import com.alevat.cabbage.account.service.dto.TransactionDTO
-import cucumber.api.java.en.Given
 import net.serenitybdd.screenplay.Actor
+import net.thucydides.core.annotations.Steps
 
 class TransactionsStepImplementations {
 
@@ -14,7 +14,9 @@ class TransactionsStepImplementations {
     def transactionDetails = new TransactionDTO()
 
     def iHaveAnAccount() {
-        theClient.wasAbleTo(CreateAnAccount.named(TEST_ACCOUNT_NAME))
+        if (!TheCurrentAccount.exists()) {
+            theClient.wasAbleTo(CreateAnAccount.named(TEST_ACCOUNT_NAME))
+        }
     }
 
     def iPostATransactionWith(BigDecimal amount) {

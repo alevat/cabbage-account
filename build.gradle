@@ -1,3 +1,5 @@
+defaultTasks 'clean', 'build', 'test', 'aggregate'
+
 buildscript {
 
     repositories {

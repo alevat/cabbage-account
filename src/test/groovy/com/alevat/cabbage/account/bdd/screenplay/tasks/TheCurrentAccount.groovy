@@ -15,6 +15,10 @@ class TheCurrentAccount implements Interaction {
     @Delegate
     private static AccountDTO currentAccount
 
+    static boolean exists() {
+        return currentAccount != null
+    }
+
     static TheCurrentAccount load() {
         return instrumented(TheCurrentAccount)
     }
