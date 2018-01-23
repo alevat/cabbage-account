@@ -37,6 +37,7 @@ class LambdaProxyController {
     APIGatewayProxyRequestEvent buildRequestEvent(HttpEntity<String> httpEntity, HttpServletRequest servletRequest) {
         APIGatewayProxyRequestEvent requestEvent = new APIGatewayProxyRequestEvent()
         requestEvent.httpMethod = servletRequest.method
+        requestEvent.path = servletRequest.servletPath
         requestEvent.body = httpEntity.body
         return requestEvent
     }

@@ -1,4 +1,4 @@
-package com.alevat.cabbage.account;
+package com.alevat.cabbage.account.rest;
 
 public class InvalidRequestException extends RuntimeException {
 

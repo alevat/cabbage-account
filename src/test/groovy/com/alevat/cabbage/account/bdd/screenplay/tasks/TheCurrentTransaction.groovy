@@ -11,7 +11,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented
 class TheCurrentTransaction implements Interaction {
 
     @Delegate
-    private static TransactionDTO details = new TransactionDTO()
+    static TransactionDTO details = new TransactionDTO()
 
     static TheCurrentTransaction load() {
         return instrumented(TheCurrentTransaction)
