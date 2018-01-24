@@ -5,6 +5,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.google.common.base.Splitter;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -13,12 +14,26 @@ import java.util.List;
 @Component
 abstract class AbstractResourceHandler {
 
+    @Value("${PATH_PREFIX}")
+    private String pathPrefix;
+
     @Inject
     private JsonHelper jsonHelper;
 
     boolean isHandlerFor(APIGatewayProxyRequestEvent requestEvent) {
-        List<String> pathElements = Splitter.on('/').omitEmptyStrings().splitToList(requestEvent.getPath());
+        List<String> pathElements = getResourcePathElements(requestEvent);
         return isHandlerFor(pathElements);
+    }
+
+    @NotNull
+    private List<String> getResourcePathElements(APIGatewayProxyRequestEvent requestEvent) {
+        String resourcePath = getResourcePath(requestEvent);
+        return Splitter.on('/').omitEmptyStrings().splitToList(resourcePath);
+    }
+
+    private String getResourcePath(APIGatewayProxyRequestEvent requestEvent) {
+        String path = requestEvent.getPath();
+        return path.replaceFirst(pathPrefix, "");
     }
 
     abstract boolean isHandlerFor(List<String> pathElements);

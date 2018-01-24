@@ -29,7 +29,7 @@ public class AccountMicroserviceRequestHandler
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent requestEvent, Context context) {
         try {
-            LOG.debug("Dispatching request " + requestEvent);
+            LOG.debug("Dispatching request: " + requestEvent);
             return dispatch(requestEvent, context);
         } catch (InvalidRequestException e) {
             Message message = new Message(e.getMessage());

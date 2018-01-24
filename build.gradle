@@ -97,6 +97,7 @@ test {
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
     environment "STAGE", "local"
+    environment "PATH_PREFIX", ""
 }
 
 test.dependsOn copyTestDependencies
@@ -104,3 +105,4 @@ test.dependsOn copyTestDependencies
 gradle.startParameter.continueOnFailure = true
 
 test.finalizedBy(aggregate)
+integrationTest.finalizedBy(aggregate)

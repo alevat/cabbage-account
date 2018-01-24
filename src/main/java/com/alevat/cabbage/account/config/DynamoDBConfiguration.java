@@ -23,10 +23,6 @@ public class DynamoDBConfiguration {
     private String stage;
 
     @Bean
-    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-    @Bean
     AmazonDynamoDB amazonDynamoDB() {
         return AmazonDynamoDBClientBuilder.standard().build();
     }
