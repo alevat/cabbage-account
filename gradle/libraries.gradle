@@ -3,6 +3,7 @@ ext {
     assertJVersion='3.8.0'
     awsLambdaCoreVersion='1.2.0'
     awsLambdaEventsVersion='2.0.2'
+    awsLambdaLog4J2Version='1.0.0'
     dynamoDbLocalVersion='1.11.86'
     googleGuavaVersion='23.6-jre'
     jacksonVersion='2.9.3'
@@ -30,7 +31,8 @@ ext {
                     dynamodbLocal: "com.amazonaws:DynamoDBLocal:${dynamoDbLocalVersion}",
                     lambda: [
                             core: "com.amazonaws:aws-lambda-java-core:${awsLambdaCoreVersion}",
-                            events: "com.amazonaws:aws-lambda-java-events:${awsLambdaEventsVersion}"
+                            events: "com.amazonaws:aws-lambda-java-events:${awsLambdaEventsVersion}",
+                            log4j2: "com.amazonaws:aws-lambda-java-log4j2:${awsLambdaLog4J2Version}"
                     ]
             ],
 

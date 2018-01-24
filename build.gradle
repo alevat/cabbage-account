@@ -53,6 +53,7 @@ dependencies {
             libs.aws.dynamodb,
             libs.aws.lambda.core,
             libs.aws.lambda.events,
+            libs.aws.lambda.log4j2,
             libs.guava,
             libs.jackson.annotations,
             libs.jackson.core,
