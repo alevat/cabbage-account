@@ -97,7 +97,7 @@ test {
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
     environment "STAGE", "local"
-    environment "PATH_PREFIX", ""
+    environment "PATH_PREFIX", "/v1"
 }
 
 test.dependsOn copyTestDependencies

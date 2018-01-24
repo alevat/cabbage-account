@@ -4,6 +4,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.google.common.base.Splitter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Component
 abstract class AbstractResourceHandler {
+
+    private static final Logger LOG = LogManager.getLogger(AbstractResourceHandler.class);
 
     @Value("${PATH_PREFIX}")
     private String pathPrefix;
@@ -66,8 +70,10 @@ abstract class AbstractResourceHandler {
 
     @NotNull
     static IllegalArgumentException noHandlerException(APIGatewayProxyRequestEvent requestEvent) {
-        throw new InvalidRequestException("No handler for request: "
-                + requestEvent.getHttpMethod() + " " + requestEvent.getPath());
+        String message = "No handler for request: "
+                + requestEvent.getHttpMethod() + " " + requestEvent.getPath();
+        LOG.warn(message);
+        throw new InvalidRequestException(message);
     }
 
     <T> T getFromBody(APIGatewayProxyRequestEvent requestEvent, Class<T> type) {

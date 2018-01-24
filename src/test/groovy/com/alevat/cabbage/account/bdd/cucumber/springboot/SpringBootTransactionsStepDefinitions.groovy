@@ -30,8 +30,8 @@ class SpringBootTransactionsStepDefinitions {
     private Integer serverPort
 
     @Before
-    def "Configure the test port"() {
-        RestAssured.baseURI = "http://localhost:" + serverPort
+    def setUp() {
+        RestAssured.baseURI = "http://localhost:" + serverPort +"/v1"
     }
 
     @Given("^I have an account")
