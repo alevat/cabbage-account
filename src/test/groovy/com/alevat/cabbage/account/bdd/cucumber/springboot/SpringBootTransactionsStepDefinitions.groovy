@@ -41,7 +41,6 @@ class SpringBootTransactionsStepDefinitions {
 
     @When("^I post a transaction to an account with the amount (.*)")
     def iPostATransactionWith(BigDecimal amount) {
-        println(amount)
         implementations.iPostATransactionWith(amount)
     }
 

@@ -30,7 +30,7 @@ abstract class AbstractResourceHandler {
     }
 
     @NotNull
-    private List<String> getResourcePathElements(APIGatewayProxyRequestEvent requestEvent) {
+    List<String> getResourcePathElements(APIGatewayProxyRequestEvent requestEvent) {
         String resourcePath = getResourcePath(requestEvent);
         return Splitter.on('/').omitEmptyStrings().splitToList(resourcePath);
     }

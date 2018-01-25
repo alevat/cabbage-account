@@ -18,7 +18,7 @@ import java.util.List;
 class AccountsResourceHandler extends AbstractResourceHandler {
 
     @Inject
-    private AccountService accountService;
+    private AccountService service;
 
     @Override
     boolean isHandlerFor(List<String> pathElements) {
@@ -29,7 +29,7 @@ class AccountsResourceHandler extends AbstractResourceHandler {
     @Override
     APIGatewayProxyResponseEvent doPost(APIGatewayProxyRequestEvent requestEvent, Context context) {
         AccountDTO account = getFromBody(requestEvent, AccountDTO.class);
-        account = accountService.create(account);
+        account = service.create(account);
         return buildResponse(account, HttpStatus.SC_CREATED);
     }
 

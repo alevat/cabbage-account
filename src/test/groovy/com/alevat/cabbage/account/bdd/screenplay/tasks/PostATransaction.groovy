@@ -18,6 +18,8 @@ class PostATransaction implements Task {
     @Steps
     private TheCurrentAccount theCurrentAccount
 
+    private String accountId
+
     private TransactionDTO transactionDetails = new TransactionDTO()
 
     PostATransaction withAmount(BigDecimal amount) {
@@ -40,7 +42,7 @@ class PostATransaction implements Task {
     }
 
     String createTransactionPath() {
-        return "/accounts/" + theCurrentAccount.id + "/transactions"
+        return "/accounts/" + accountId + "/transactions"
     }
 
     static PostATransaction forAmount(BigDecimal amount) {
@@ -49,7 +51,7 @@ class PostATransaction implements Task {
     }
 
     PostATransaction toTheCurrentAccount() {
-        transactionDetails.accountId = theCurrentAccount.id
+        accountId = theCurrentAccount.id
         return this
     }
 }
