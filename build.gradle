@@ -58,6 +58,7 @@ dependencies {
             libs.jackson.annotations,
             libs.jackson.core,
             libs.jackson.databind,
+            libs.jackson.jsr310,
             libs.javax.inject,
             libs.spring.core,
             libs.spring.context,

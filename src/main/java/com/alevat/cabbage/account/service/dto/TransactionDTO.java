@@ -1,5 +1,6 @@
 package com.alevat.cabbage.account.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
 
 import java.math.BigDecimal;
@@ -9,8 +10,11 @@ import java.util.UUID;
 public class TransactionDTO {
 
     private UUID id;
+
     private BigDecimal amount;
+
     private TransactionType type;
+
     private OffsetDateTime timestamp;
 
     public UUID getId() {
@@ -37,6 +41,7 @@ public class TransactionDTO {
         this.type = type;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     public OffsetDateTime getTimestamp() {
         return timestamp;
     }

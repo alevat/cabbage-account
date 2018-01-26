@@ -32,10 +32,17 @@ public class AccountMicroserviceRequestHandler
             LOG.debug("Dispatching request: " + requestEvent);
             return dispatch(requestEvent, context);
         } catch (InvalidRequestException e) {
+            LOG.warn("Invalid request: " + e.getMessage());
             Message message = new Message(e.getMessage());
             return new APIGatewayProxyResponseEvent()
                     .withBody(jsonHelper.toJson(message))
                     .withStatusCode(HttpStatus.SC_BAD_REQUEST);
+        } catch (RuntimeException e) {
+            LOG.error("System error handling request " + requestEvent, e);
+            Message message = new Message(e.getMessage());
+            return new APIGatewayProxyResponseEvent()
+                    .withBody(jsonHelper.toJson(message))
+                    .withStatusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
         }
     }
 

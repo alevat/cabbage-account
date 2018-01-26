@@ -41,7 +41,8 @@ ext {
             jackson: [
                     annotations: "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
                     core: "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
-                    databind: "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+                    databind: "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+                    jsr310: "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
             ],
 
             javax: [
