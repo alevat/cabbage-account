@@ -16,7 +16,7 @@ class TransactionsStepDefinitions {
         implementations.iHaveAnAccount()
     }
 
-    @When("^I post a transaction to an account with the amount <amount>")
+    @When("^I post a transaction to an account with the amount (.*)")
     def iPostATransactionWith(BigDecimal amount) {
         implementations.iPostATransactionWith(amount)
     }
