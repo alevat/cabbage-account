@@ -4,9 +4,14 @@ import com.alevat.cabbage.account.domain.Transaction;
 import com.alevat.cabbage.account.service.TransactionService;
 import com.alevat.cabbage.account.service.dto.TransactionDTO;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import org.joda.time.DateTimeUtils;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.UUID;
 
 @Component
@@ -26,7 +31,8 @@ class TransactionServiceImpl implements TransactionService {
 
     private void loadFromDto(Transaction transaction, TransactionDTO transactionDTO) {
         transaction.setAmount(transactionDTO.getAmount());
-        transaction.setTimestamp(transactionDTO.getTimestamp());
+        Date timestampDate = Date.from(transactionDTO.getTimestamp().toInstant());
+        transaction.setTimestamp(timestampDate);
         transaction.setType(transactionDTO.getType());
     }
 
@@ -35,7 +41,8 @@ class TransactionServiceImpl implements TransactionService {
         transactionDTO.setId(transaction.getId());
         transactionDTO.setAmount(transaction.getAmount());
         transactionDTO.setType(transaction.getType());
-        transactionDTO.setTimestamp(transaction.getTimestamp());
+        Instant timestampInstant = transaction.getTimestamp().toInstant();
+        transactionDTO.setTimestamp(OffsetDateTime.ofInstant(timestampInstant, ZoneId.systemDefault()));
         return transactionDTO;
     }
 

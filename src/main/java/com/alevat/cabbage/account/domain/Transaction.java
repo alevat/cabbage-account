@@ -6,6 +6,7 @@ import com.google.common.base.MoreObjects;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @DynamoDBTable(tableName = "cabbage-transaction")
@@ -24,7 +25,7 @@ public class Transaction {
     private TransactionType type;
 
     @DynamoDBTypeConvertedTimestamp
-    private OffsetDateTime timestamp;
+    private Date timestamp;
 
     public UUID getId() {
         return id;
@@ -58,11 +59,11 @@ public class Transaction {
         this.type = type;
     }
 
-    public OffsetDateTime getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(OffsetDateTime timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 

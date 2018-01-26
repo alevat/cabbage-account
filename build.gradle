@@ -36,6 +36,17 @@ configurations {
     integration_testRuntime.extendsFrom testRuntime
 }
 
+allprojects {
+    apply plugin: 'idea'
+    idea {
+        module {
+            inheritOutputDirs = false
+            outputDir = file('build/classes/main')
+            testOutputDir = file('build/classes/test')
+        }
+    }
+}
+
 task integrationTest(type: Test) {
     testClassesDirs = sourceSets.integration_test.output.classesDirs
     classpath = sourceSets.integration_test.runtimeClasspath

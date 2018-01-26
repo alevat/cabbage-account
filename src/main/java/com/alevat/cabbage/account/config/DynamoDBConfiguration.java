@@ -1,6 +1,7 @@
 package com.alevat.cabbage.account.config;
 
 import com.alevat.cabbage.account.domain.Account;
+import com.alevat.cabbage.account.domain.Transaction;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
@@ -47,7 +48,16 @@ public class DynamoDBConfiguration {
     private void createTables(AmazonDynamoDB dynamoDB,
                               DynamoDBMapper mapper,
                               DynamoDBMapperConfig config) throws InterruptedException {
-        CreateTableRequest createRequest = mapper.generateCreateTableRequest(Account.class, config);
+        createTable(dynamoDB, mapper, config, Account.class);
+        createTable(dynamoDB, mapper, config, Transaction.class);
+        return;
+    }
+
+    private void createTable(AmazonDynamoDB dynamoDB,
+                             DynamoDBMapper mapper,
+                             DynamoDBMapperConfig config,
+                             Class<?> tableClass) throws InterruptedException {
+        CreateTableRequest createRequest = mapper.generateCreateTableRequest(tableClass, config);
         ProvisionedThroughput throughput = new ProvisionedThroughput()
                 .withReadCapacityUnits(5L)
                 .withWriteCapacityUnits(5L);

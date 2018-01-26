@@ -23,7 +23,7 @@ class PostATransaction implements Task {
     private TransactionDTO transactionDetails = new TransactionDTO()
 
     PostATransaction withAmount(BigDecimal amount) {
-        transactionDetails.amount = Math.abs(amount)
+        transactionDetails.amount = amount.abs();
         transactionDetails.type = amount < 0 ? TransactionType.DEBIT : TransactionType.CREDIT
         transactionDetails.timestamp = OffsetDateTime.now()
         return this
