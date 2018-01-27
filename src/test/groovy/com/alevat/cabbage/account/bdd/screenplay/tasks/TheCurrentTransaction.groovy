@@ -3,6 +3,7 @@ package com.alevat.cabbage.account.bdd.screenplay.tasks
 import com.alevat.cabbage.account.service.dto.TransactionDTO
 import net.serenitybdd.screenplay.Actor
 import net.serenitybdd.screenplay.Interaction
+import net.serenitybdd.screenplay.Question
 import net.thucydides.core.annotations.Step
 
 import static net.serenitybdd.rest.SerenityRest.then
@@ -15,6 +16,15 @@ class TheCurrentTransaction implements Interaction {
 
     static TheCurrentTransaction load() {
         return instrumented(TheCurrentTransaction)
+    }
+
+    static Question<Boolean> isListedInLedger() {
+        return new Question() {
+            @Override
+            Object answeredBy(Actor actor) {
+                return true
+            }
+        }
     }
 
     @Override
