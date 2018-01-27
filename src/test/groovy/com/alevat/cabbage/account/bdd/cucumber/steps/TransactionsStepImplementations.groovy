@@ -5,10 +5,10 @@ import com.alevat.cabbage.account.bdd.screenplay.tasks.PostATransaction
 import com.alevat.cabbage.account.bdd.screenplay.tasks.TheCurrentAccount
 import com.alevat.cabbage.account.bdd.screenplay.tasks.TheCurrentTransaction
 import net.serenitybdd.screenplay.Actor
-import net.serenitybdd.screenplay.GivenWhenThen
 import net.thucydides.core.annotations.Steps
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat
+import static org.hamcrest.core.IsCollectionContaining.hasItem
 
 class TransactionsStepImplementations {
 
@@ -30,7 +30,7 @@ class TransactionsStepImplementations {
     }
 
     def theTransactionShouldBeListed() {
-        theClient.should(seeThat(TheCurrentTransaction.isListedInLedger()))
+        theClient.should(seeThat(TheCurrentAccount.ledger(), hasItem(TheCurrentTransaction.details)))
     }
 
 }

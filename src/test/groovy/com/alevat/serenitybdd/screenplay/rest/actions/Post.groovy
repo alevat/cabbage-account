@@ -1,12 +1,13 @@
 package com.alevat.serenitybdd.screenplay.rest.actions
 
-import net.serenitybdd.screenplay.Actor
-import net.thucydides.core.annotations.Step
+import io.restassured.response.ValidatableResponse
+import org.apache.commons.lang3.StringUtils
 
-import static net.serenitybdd.rest.SerenityRest.given
 import static net.serenitybdd.screenplay.Tasks.instrumented
 
-class Post extends AbstractHttpMethod {
+class Post extends RestInvocation {
+
+    private String body = StringUtils.EMPTY
 
     Post(path)
     {
@@ -17,17 +18,23 @@ class Post extends AbstractHttpMethod {
         return instrumented(Post, path)
     }
 
+    Post withBody(Object body) {
+        this.body = getObjectMapper().writeValueAsString(body)
+        return this
+    }
+
     @Override
-    @Step("{0} invokes POST for #path")
-    <T extends Actor> void performAs(T restClient) {
-        given()
-                .contentType(contentType)
-                .queryParams(queryParameters)
-                .body(body)
+    ValidatableResponse call() {
+        configureRequest()
+            .body(body)
         .when()
-                .post(path)
+            .post(path)
         .then()
             .statusCode(expectedStatusCode)
     }
 
+    @Override
+    String getMethodName() {
+        return "POST"
+    }
 }

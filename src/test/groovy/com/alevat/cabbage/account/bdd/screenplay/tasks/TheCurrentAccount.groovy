@@ -1,13 +1,15 @@
 package com.alevat.cabbage.account.bdd.screenplay.tasks
 
 import com.alevat.cabbage.account.service.dto.AccountDTO
+import com.alevat.cabbage.account.service.dto.TransactionDTO
+import com.alevat.serenitybdd.screenplay.rest.actions.Get
+import com.alevat.serenitybdd.screenplay.rest.actions.RestInvocation
 import net.serenitybdd.screenplay.Actor
 import net.serenitybdd.screenplay.Interaction
 import net.serenitybdd.screenplay.Question
 import net.serenitybdd.screenplay.annotations.Subject
 import net.thucydides.core.annotations.Step
 
-import static net.serenitybdd.rest.SerenityRest.then
 import static net.serenitybdd.screenplay.Tasks.instrumented
 
 class TheCurrentAccount implements Interaction {
@@ -33,10 +35,21 @@ class TheCurrentAccount implements Interaction {
         };
     }
 
+    static Question<List<TransactionDTO>> ledger() {
+        return new Question<List<TransactionDTO>>() {
+            @Override
+            @Subject("the transaction ledger")
+            List<TransactionDTO> answeredBy(Actor actor) {
+                Get.fromPath("/accounts/" + account.id).call()
+                return Get.getResultAs(List);
+            }
+        }
+    }
+
     @Override
-    @Step("{0} extracts the account from the REST response body")
+    @Step("{0} extracts the account from the current REST response body")
     <T extends Actor> void performAs(T actor) {
-        account = then().extract().body().as(AccountDTO)
+        account = RestInvocation.getResultAs(AccountDTO)
     }
 
 }
