@@ -4,6 +4,10 @@ import com.alevat.cabbage.account.domain.Transaction;
 import com.alevat.cabbage.account.service.TransactionService;
 import com.alevat.cabbage.account.service.dto.TransactionDTO;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.Condition;
 import org.joda.time.DateTimeUtils;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +15,8 @@ import javax.inject.Inject;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 class TransactionServiceImpl implements TransactionService {
@@ -29,14 +33,28 @@ class TransactionServiceImpl implements TransactionService {
         return toDTO(transaction);
     }
 
-    private void loadFromDto(Transaction transaction, TransactionDTO transactionDTO) {
+    @Override
+    public List<TransactionDTO> get(UUID accountId) {
+        Map<String, AttributeValue> values = new HashMap<>();
+        values.put(":accountId", new AttributeValue().withS(accountId.toString()));
+        Map<String, String> names = new HashMap<>();
+        names.put("#accountId", "accountId");
+        DynamoDBQueryExpression<Transaction> query = new DynamoDBQueryExpression<Transaction>()
+                .withKeyConditionExpression("#accountId = :accountId")
+                .withExpressionAttributeNames(names)
+                .withExpressionAttributeValues(values);
+        PaginatedQueryList<Transaction> result = mapper.query(Transaction.class, query);
+        return result.stream().map(TransactionServiceImpl::toDTO).collect(Collectors.toList());
+    }
+
+    private static void loadFromDto(Transaction transaction, TransactionDTO transactionDTO) {
         transaction.setAmount(transactionDTO.getAmount());
         Date timestampDate = Date.from(transactionDTO.getTimestamp().toInstant());
         transaction.setTimestamp(timestampDate);
         transaction.setType(transactionDTO.getType());
     }
 
-    private TransactionDTO toDTO(Transaction transaction) {
+    private static TransactionDTO toDTO(Transaction transaction) {
         TransactionDTO transactionDTO = new TransactionDTO();
         transactionDTO.setId(transaction.getId());
         transactionDTO.setAmount(transaction.getAmount());

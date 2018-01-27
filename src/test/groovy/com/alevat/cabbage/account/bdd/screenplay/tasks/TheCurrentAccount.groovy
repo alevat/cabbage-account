@@ -9,6 +9,7 @@ import net.serenitybdd.screenplay.Interaction
 import net.serenitybdd.screenplay.Question
 import net.serenitybdd.screenplay.annotations.Subject
 import net.thucydides.core.annotations.Step
+import org.apache.http.HttpStatus
 
 import static net.serenitybdd.screenplay.Tasks.instrumented
 
@@ -40,7 +41,9 @@ class TheCurrentAccount implements Interaction {
             @Override
             @Subject("the transaction ledger")
             List<TransactionDTO> answeredBy(Actor actor) {
-                Get.fromPath("/accounts/" + account.id).call()
+                Get.fromPath("/accounts/" + account.id + "/transactions")
+                        .withExpectedStatusCode(HttpStatus.SC_OK)
+                        .call()
                 return Get.getResultAs(List);
             }
         }

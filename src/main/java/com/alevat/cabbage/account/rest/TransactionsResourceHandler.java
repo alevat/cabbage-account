@@ -37,6 +37,12 @@ class TransactionsResourceHandler extends AbstractResourceHandler {
         return buildResponse(transactionDTO, HttpStatus.SC_CREATED);
     }
 
+    @Override
+    APIGatewayProxyResponseEvent doGet(APIGatewayProxyRequestEvent requestEvent, Context context) {
+        List<TransactionDTO> transactions = service.get(getAccountId(requestEvent));
+        return buildResponse(transactions, HttpStatus.SC_OK);
+    }
+
     private UUID getAccountId(APIGatewayProxyRequestEvent requestEvent) {
         String accountIdPathParam = getResourcePathElements(requestEvent).get(ACCOUNT_ID_PATH_PARAM_INDEX);
         return UUID.fromString(accountIdPathParam);
