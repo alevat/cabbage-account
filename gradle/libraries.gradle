@@ -1,0 +1,78 @@
+ext {
+    apacheHttpComponetsCoreVersion='4.4.8'
+    assertJVersion='3.8.0'
+    awsLambdaCoreVersion='1.2.0'
+    awsLambdaEventsVersion='2.0.2'
+    awsLambdaLog4J2Version='1.0.0'
+    dynamoDbLocalVersion='1.11.86'
+    googleGuavaVersion='23.6-jre'
+    jacksonVersion='2.9.3'
+    junitVersion='4.12'
+    logbackVersion='1.2.3'
+    serenityCoreVersion = '1.8.21'
+    serenityCucumberVersion = '1.6.9'
+    slf4jVersion = '1.7.7'
+    springAwsLambdaVersion='1.1.0'
+    springBootVersion='1.5.9.RELEASE'
+    springVersion='5.0.2.RELEASE'
+
+    libs = [
+            slf4jApi: "org.slf4j:slf4j-api:$slf4jVersion",
+            logback: "ch.qos.logback:logback-classic:${logbackVersion}",
+
+            apache: [
+                    http: [
+                            core: "org.apache.httpcomponents:httpcore:${apacheHttpComponetsCoreVersion}"
+                    ]
+            ],
+
+            aws: [
+                    dynamodb: "com.amazonaws:aws-java-sdk-dynamodb",
+                    dynamodbLocal: "com.amazonaws:DynamoDBLocal:${dynamoDbLocalVersion}",
+                    lambda: [
+                            core: "com.amazonaws:aws-lambda-java-core:${awsLambdaCoreVersion}",
+                            events: "com.amazonaws:aws-lambda-java-events:${awsLambdaEventsVersion}",
+                            log4j2: "com.amazonaws:aws-lambda-java-log4j2:${awsLambdaLog4J2Version}"
+                    ]
+            ],
+
+            guava: "com.google.guava:guava:${googleGuavaVersion}",
+
+            jackson: [
+                    annotations: "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
+                    core: "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+                    databind: "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+                    jsr310: "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
+            ],
+
+            javax: [
+                    inject: "javax.inject:javax.inject:1"
+            ],
+
+            spring: [
+                    core: "org.springframework:spring-core:${springVersion}",
+                    context: "org.springframework:spring-context:${springVersion}",
+                    boot: [
+                            web: "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+                    ],
+                    awsLambda: "me.ccampo:spring-aws-lambda:${springAwsLambdaVersion}"
+            ],
+
+            test: [
+                    serenity: [
+                            core: "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+                            screenplay: "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+                            screenplayWebdriver: "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+                            cucumber: "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}",
+                            restAssured: "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}",
+                            spring: "net.serenity-bdd:serenity-spring:${serenityCoreVersion}"
+                    ],
+                    spring: [
+                            boot: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+                    ],
+                    junit: "junit:junit:${junitVersion}",
+                    assertj: "org.assertj:assertj-core:${assertJVersion}"
+            ]
+    ]
+
+}
