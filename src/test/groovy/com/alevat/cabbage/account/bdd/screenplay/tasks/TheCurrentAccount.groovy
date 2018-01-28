@@ -44,7 +44,7 @@ class TheCurrentAccount implements Interaction {
                 Get.fromPath("/accounts/" + account.id + "/transactions")
                         .withExpectedStatusCode(HttpStatus.SC_OK)
                         .call()
-                return Get.getResultAs(List);
+                return Get.getResultAsListOf(TransactionDTO);
             }
         }
     }

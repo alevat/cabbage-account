@@ -5,6 +5,7 @@ import com.google.common.base.MoreObjects;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 public class TransactionDTO {
@@ -58,5 +59,29 @@ public class TransactionDTO {
                 .add("type", type)
                 .add("timestamp", timestamp)
                 .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TransactionDTO that = (TransactionDTO) o;
+        return Objects.equals(id, that.id) &&
+                type == that.type &&
+                areAmountsEqual(that) &&
+                Objects.equals(timestamp, that.timestamp);
+    }
+
+    private boolean areAmountsEqual(TransactionDTO that) {
+        if (amount == null || that.amount == null) {
+            return amount == that.amount;
+        } else {
+            return amount.compareTo(that.amount) == 0;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, amount, type, timestamp);
     }
 }
