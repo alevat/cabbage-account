@@ -1,5 +1,6 @@
 package com.alevat.cabbage.account.rest;
 
+import com.alevat.cabbage.account.config.PathPrefix;
 import com.alevat.cabbage.account.service.AccountService;
 import com.alevat.cabbage.account.service.dto.AccountDTO;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -17,6 +18,12 @@ class AccountsResourceHandler extends AbstractResourceHandler {
 
     @Inject
     private AccountService service;
+
+    @Inject
+    AccountsResourceHandler(AccountService service, @PathPrefix String pathPrefix, JsonHelper jsonHelper) {
+        super(pathPrefix, jsonHelper);
+        this.service = service;
+    }
 
     @Override
     boolean isHandlerFor(List<String> pathElements) {

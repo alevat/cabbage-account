@@ -17,8 +17,12 @@ import java.util.stream.Collectors;
 
 class TransactionServiceImpl implements TransactionService {
 
+    private final DynamoDBMapper mapper;
+
     @Inject
-    private DynamoDBMapper mapper;
+    TransactionServiceImpl(DynamoDBMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public TransactionDTO create(UUID accountId, TransactionDTO transactionDTO) {

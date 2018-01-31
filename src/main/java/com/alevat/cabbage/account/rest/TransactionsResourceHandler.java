@@ -1,5 +1,6 @@
 package com.alevat.cabbage.account.rest;
 
+import com.alevat.cabbage.account.config.PathPrefix;
 import com.alevat.cabbage.account.service.TransactionService;
 import com.alevat.cabbage.account.service.dto.TransactionDTO;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -16,10 +17,15 @@ import java.util.UUID;
  */
 class TransactionsResourceHandler extends AbstractResourceHandler {
 
-    public static final int ACCOUNT_ID_PATH_PARAM_INDEX = 1;
+    private static final int ACCOUNT_ID_PATH_PARAM_INDEX = 1;
+
+    private TransactionService service;
 
     @Inject
-    private TransactionService service;
+    TransactionsResourceHandler(TransactionService service, @PathPrefix String pathPrefix, JsonHelper jsonHelper) {
+        super(pathPrefix, jsonHelper);
+        this.service = service;
+    }
 
     @Override
     boolean isHandlerFor(List<String> pathElements) {

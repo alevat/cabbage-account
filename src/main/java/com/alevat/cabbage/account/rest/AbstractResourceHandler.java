@@ -16,11 +16,14 @@ abstract class AbstractResourceHandler implements ResourceHandler {
 
     private static final Logger LOG = LogManager.getLogger(AbstractResourceHandler.class);
 
-    @Inject @PathPrefix
-    private String pathPrefix;
+    private final String pathPrefix;
 
-    @Inject
-    private JsonHelper jsonHelper;
+    private final JsonHelper jsonHelper;
+
+    AbstractResourceHandler(@PathPrefix String pathPrefix, JsonHelper jsonHelper) {
+        this.pathPrefix = pathPrefix;
+        this.jsonHelper = jsonHelper;
+    }
 
     public final boolean isHandlerFor(APIGatewayProxyRequestEvent requestEvent) {
         List<String> pathElements = getResourcePathElements(requestEvent);

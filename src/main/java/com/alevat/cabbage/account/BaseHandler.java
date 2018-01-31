@@ -15,7 +15,6 @@ import com.google.inject.Injector;
 
 public class BaseHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    @Inject
     private RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> delegateHandler;
 
     public BaseHandler() {
@@ -27,6 +26,11 @@ public class BaseHandler implements RequestHandler<APIGatewayProxyRequestEvent, 
                 new DynamoDBModule(),
                 new ConfigurationModule());
         injector.injectMembers(this);
+    }
+
+    @Inject
+    void setDelegateHandler(RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> delegateHandler) {
+        this.delegateHandler = delegateHandler;
     }
 
     @Override

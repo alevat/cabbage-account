@@ -9,8 +9,12 @@ import javax.inject.Inject;
 
 class AccountServiceImpl implements AccountService {
 
+    private final DynamoDBMapper mapper;
+
     @Inject
-    private DynamoDBMapper mapper;
+    AccountServiceImpl(DynamoDBMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public AccountDTO create(AccountDTO accountDTO) {
