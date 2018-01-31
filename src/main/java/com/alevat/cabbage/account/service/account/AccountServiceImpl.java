@@ -7,7 +7,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
 
-public class AccountServiceImpl implements AccountService {
+class AccountServiceImpl implements AccountService {
 
     @Inject
     private DynamoDBMapper mapper;

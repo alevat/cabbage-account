@@ -3,7 +3,6 @@ package com.alevat.cabbage.account.bdd.cucumber.springboot
 import com.alevat.cabbage.account.BaseHandler
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
 import com.amazonaws.services.dynamodbv2.local.embedded.DynamoDBEmbedded
-import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
@@ -19,13 +18,7 @@ class SpringBootTestConfiguration {
 
     @Bean
     RequestHandler getRequestHandler() {
-        return new RequestHandler() {
-            @Override
-            Object handleRequest(Object input, Context context) {
-                return new BaseHandler();
-            }
-        }
+        return new BaseHandler();
     }
-
 
 }

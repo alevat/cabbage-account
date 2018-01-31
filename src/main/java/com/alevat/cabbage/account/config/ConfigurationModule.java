@@ -9,7 +9,7 @@ public class ConfigurationModule extends AbstractModule {
         String stage = System.getenv("STAGE");
         bindConstant().annotatedWith(Stage.class).to(stage);
         String pathPrefix = System.getenv("PATH_PREFIX");
-        bindConstant().annotatedWith(PathPrefix.class).to(stage);
+        bindConstant().annotatedWith(PathPrefix.class).to(pathPrefix);
     }
 
 }

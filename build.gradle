@@ -67,14 +67,18 @@ dependencies {
             libs.aws.lambda.log4j2,
             libs.google.guava,
             libs.google.guice,
+            libs.google.guiceMultibindings,
             libs.jackson.annotations,
             libs.jackson.core,
             libs.jackson.databind,
             libs.jackson.jsr310,
             libs.javax.inject
 
-    testCompile libs.aws.dynamodbLocal,
-                libs.spring.boot.web,
+    testCompile (libs.aws.dynamodbLocal) {
+        exclude (group: 'org.eclipse.jetty.orbit', module: 'javax.servlet')
+    }
+
+    testCompile libs.spring.boot.web,
                 libs.test.assertj,
                 libs.test.junit,
                 libs.test.serenity.core,

@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import java.util.List;
+import java.util.Set;
 
 import static com.alevat.cabbage.account.rest.AbstractResourceHandler.noHandlerException;
 
@@ -19,7 +19,7 @@ class AccountMicroserviceRequestHandler
     private static final Logger LOG = LogManager.getLogger(AccountMicroserviceRequestHandler.class);
 
     @Inject
-    private List<AbstractResourceHandler> handlers;
+    private Set<ResourceHandler> handlers;
 
     @Inject
     private JsonHelper jsonHelper;
@@ -45,7 +45,7 @@ class AccountMicroserviceRequestHandler
     }
 
     private APIGatewayProxyResponseEvent dispatch(APIGatewayProxyRequestEvent requestEvent, Context context) {
-        for (AbstractResourceHandler handler : handlers) {
+        for (ResourceHandler handler : handlers) {
             if (handler.isHandlerFor(requestEvent)) {
                 return handler.handleRequest(requestEvent, context);
             }

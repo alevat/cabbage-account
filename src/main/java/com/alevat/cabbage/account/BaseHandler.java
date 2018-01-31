@@ -1,6 +1,10 @@
 package com.alevat.cabbage.account;
 
+import com.alevat.cabbage.account.config.ConfigurationModule;
+import com.alevat.cabbage.account.config.DynamoDBModule;
 import com.alevat.cabbage.account.rest.RequestHandlerModule;
+import com.alevat.cabbage.account.service.account.AccountServiceModule;
+import com.alevat.cabbage.account.service.transaction.TransactionServiceModule;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
@@ -16,7 +20,12 @@ public class BaseHandler implements RequestHandler<APIGatewayProxyRequestEvent, 
 
     public BaseHandler() {
         super();
-        Injector injector = Guice.createInjector(new RequestHandlerModule());
+        Injector injector = Guice.createInjector(
+                new RequestHandlerModule(),
+                new AccountServiceModule(),
+                new TransactionServiceModule(),
+                new DynamoDBModule(),
+                new ConfigurationModule());
         injector.injectMembers(this);
     }
 

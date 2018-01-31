@@ -39,7 +39,9 @@ ext {
 
             google: [
                     guava: "com.google.guava:guava:${googleGuavaVersion}",
-                    guice: "com.google.inject:guice:${googleGuiceVersion}"
+                    guice: "com.google.inject:guice:${googleGuiceVersion}",
+                    guiceMultibindings: "com.google.inject.extensions:guice-multibindings:${googleGuiceVersion}"
+
             ],
 
             jackson: [

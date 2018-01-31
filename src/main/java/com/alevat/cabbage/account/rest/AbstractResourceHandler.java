@@ -1,5 +1,7 @@
 package com.alevat.cabbage.account.rest;
 
+import com.alevat.cabbage.account.config.PathPrefix;
+import com.alevat.cabbage.account.config.Stage;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
@@ -10,16 +12,17 @@ import org.apache.logging.log4j.Logger;
 import javax.inject.Inject;
 import java.util.List;
 
-abstract class AbstractResourceHandler {
+abstract class AbstractResourceHandler implements ResourceHandler {
 
     private static final Logger LOG = LogManager.getLogger(AbstractResourceHandler.class);
 
+    @Inject @PathPrefix
     private String pathPrefix;
 
     @Inject
     private JsonHelper jsonHelper;
 
-    boolean isHandlerFor(APIGatewayProxyRequestEvent requestEvent) {
+    public final boolean isHandlerFor(APIGatewayProxyRequestEvent requestEvent) {
         List<String> pathElements = getResourcePathElements(requestEvent);
         return isHandlerFor(pathElements);
     }
@@ -36,7 +39,7 @@ abstract class AbstractResourceHandler {
 
     abstract boolean isHandlerFor(List<String> pathElements);
 
-    final APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent requestEvent, Context context) {
+    public final APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent requestEvent, Context context) {
         String method = requestEvent.getHttpMethod();
         switch (method) {
             case "POST":
