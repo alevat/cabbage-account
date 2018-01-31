@@ -7,9 +7,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.amazonaws.services.dynamodbv2.model.Condition;
-import org.joda.time.DateTimeUtils;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.time.Instant;
@@ -18,17 +15,20 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Component
 class TransactionServiceImpl implements TransactionService {
 
+    private final DynamoDBMapper mapper;
+
     @Inject
-    private DynamoDBMapper mapper;
+    TransactionServiceImpl(DynamoDBMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public TransactionDTO create(UUID accountId, TransactionDTO transactionDTO) {
         Transaction transaction = new Transaction();
         transaction.setAccountId(accountId);
-        loadFromDto(transaction, transactionDTO);
+        loadFromDTO(transaction, transactionDTO);
         mapper.save(transaction);
         return toDTO(transaction);
     }
@@ -47,7 +47,7 @@ class TransactionServiceImpl implements TransactionService {
         return result.stream().map(TransactionServiceImpl::toDTO).collect(Collectors.toList());
     }
 
-    private static void loadFromDto(Transaction transaction, TransactionDTO transactionDTO) {
+    private static void loadFromDTO(Transaction transaction, TransactionDTO transactionDTO) {
         transaction.setAmount(transactionDTO.getAmount());
         Date timestampDate = Date.from(transactionDTO.getTimestamp().toInstant());
         transaction.setTimestamp(timestampDate);

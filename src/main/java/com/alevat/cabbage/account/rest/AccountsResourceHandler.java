@@ -1,12 +1,12 @@
 package com.alevat.cabbage.account.rest;
 
+import com.alevat.cabbage.account.config.PathPrefix;
 import com.alevat.cabbage.account.service.AccountService;
 import com.alevat.cabbage.account.service.dto.AccountDTO;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import org.apache.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -14,11 +14,16 @@ import java.util.List;
 /**
  * Handler for /accounts[/${accountId}]
  */
-@Component
 class AccountsResourceHandler extends AbstractResourceHandler {
 
     @Inject
     private AccountService service;
+
+    @Inject
+    AccountsResourceHandler(AccountService service, @PathPrefix String pathPrefix, JsonHelper jsonHelper) {
+        super(pathPrefix, jsonHelper);
+        this.service = service;
+    }
 
     @Override
     boolean isHandlerFor(List<String> pathElements) {

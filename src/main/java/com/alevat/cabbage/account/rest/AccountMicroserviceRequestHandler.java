@@ -7,21 +7,19 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.util.List;
+import java.util.Set;
 
 import static com.alevat.cabbage.account.rest.AbstractResourceHandler.noHandlerException;
 
-@Component
-public class AccountMicroserviceRequestHandler
+class AccountMicroserviceRequestHandler
         implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     private static final Logger LOG = LogManager.getLogger(AccountMicroserviceRequestHandler.class);
 
     @Inject
-    private List<AbstractResourceHandler> handlers;
+    private Set<ResourceHandler> handlers;
 
     @Inject
     private JsonHelper jsonHelper;
@@ -47,7 +45,7 @@ public class AccountMicroserviceRequestHandler
     }
 
     private APIGatewayProxyResponseEvent dispatch(APIGatewayProxyRequestEvent requestEvent, Context context) {
-        for (AbstractResourceHandler handler : handlers) {
+        for (ResourceHandler handler : handlers) {
             if (handler.isHandlerFor(requestEvent)) {
                 return handler.handleRequest(requestEvent, context);
             }
