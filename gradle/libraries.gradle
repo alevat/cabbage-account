@@ -6,6 +6,7 @@ ext {
     awsLambdaLog4J2Version='1.0.0'
     dynamoDbLocalVersion='1.11.86'
     googleGuavaVersion='23.6-jre'
+    googleGuiceVersion='4.1.0'
     jacksonVersion='2.9.3'
     junitVersion='4.12'
     logbackVersion='1.2.3'
@@ -36,7 +37,10 @@ ext {
                     ]
             ],
 
-            guava: "com.google.guava:guava:${googleGuavaVersion}",
+            google: [
+                    guava: "com.google.guava:guava:${googleGuavaVersion}",
+                    guice: "com.google.inject:guice:${googleGuiceVersion}"
+            ],
 
             jackson: [
                     annotations: "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",

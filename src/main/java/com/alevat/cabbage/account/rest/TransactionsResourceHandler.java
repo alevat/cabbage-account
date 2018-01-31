@@ -6,7 +6,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import org.apache.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.UUID;
 /**
  * Handler for /accounts/${accountId}/transactions
  */
-@Component
 class TransactionsResourceHandler extends AbstractResourceHandler {
 
     public static final int ACCOUNT_ID_PATH_PARAM_INDEX = 1;

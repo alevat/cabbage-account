@@ -6,7 +6,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import org.apache.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
 /**
  * Handler for /accounts[/${accountId}]
  */
-@Component
 class AccountsResourceHandler extends AbstractResourceHandler {
 
     @Inject

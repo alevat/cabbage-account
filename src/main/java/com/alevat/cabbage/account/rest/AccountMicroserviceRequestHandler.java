@@ -7,15 +7,13 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.util.List;
 
 import static com.alevat.cabbage.account.rest.AbstractResourceHandler.noHandlerException;
 
-@Component
-public class AccountMicroserviceRequestHandler
+class AccountMicroserviceRequestHandler
         implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     private static final Logger LOG = LogManager.getLogger(AccountMicroserviceRequestHandler.class);

@@ -3,13 +3,10 @@ package com.alevat.cabbage.account.service.account;
 import com.alevat.cabbage.account.domain.Account;
 import com.alevat.cabbage.account.service.AccountService;
 import com.alevat.cabbage.account.service.dto.AccountDTO;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
-@Service
 public class AccountServiceImpl implements AccountService {
 
     @Inject

@@ -1,7 +1,7 @@
 package com.alevat.cabbage.account.bdd.cucumber.springboot
 
 import com.alevat.aws.lambda.test.SpringBootLambdaProxy
-import com.alevat.cabbage.account.ApplicationConfiguration
+
 import com.alevat.cabbage.account.bdd.cucumber.steps.TransactionsStepImplementations
 import cucumber.api.java.Before
 import cucumber.api.java.en.Given
@@ -18,7 +18,7 @@ import javax.inject.Inject
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 
 @SpringBootTest(webEnvironment = RANDOM_PORT, classes = SpringBootLambdaProxy)
-@ContextConfiguration(classes = [ApplicationConfiguration, SpringBootTestConfiguration])
+@ContextConfiguration(classes = [SpringBootTestConfiguration])
 class SpringBootTransactionsStepDefinitions {
 
     @Steps

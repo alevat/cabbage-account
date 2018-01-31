@@ -2,12 +2,10 @@ package com.alevat.cabbage.account.rest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.io.IOException;
 
-@Component
 class JsonHelper {
 
     @Inject
