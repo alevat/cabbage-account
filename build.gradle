@@ -125,7 +125,7 @@ integrationTest.finalizedBy(aggregate)
 ext.coverage = [
         excludes: [],
         limit: [
-                line: 75,
+                line: 80,
                 branch: 45
         ]
 ]
