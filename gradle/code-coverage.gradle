@@ -9,7 +9,7 @@ jacocoTestReport {
         xml.enabled true
         csv.enabled false
         html.enabled true
-        html.destination "${reportsDir}/jacoco/html"
+        html.destination file("${reportsDir}/jacoco/html")
     }
     afterEvaluate {
         classDirectories = files(
