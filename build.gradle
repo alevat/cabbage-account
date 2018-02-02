@@ -16,6 +16,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply from: "$rootDir/gradle/libraries.gradle"
+apply from: "$rootDir/gradle/code-coverage.gradle"
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'net.serenity-bdd.aggregator'
 
@@ -120,3 +121,11 @@ gradle.startParameter.continueOnFailure = true
 
 test.finalizedBy(aggregate)
 integrationTest.finalizedBy(aggregate)
+
+ext.coverage = [
+        excludes: [],
+        limit: [
+                line: 80,
+                branch: 45
+        ]
+]
