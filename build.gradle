@@ -1,4 +1,4 @@
-defaultTasks 'clean', 'build', 'test', 'aggregate'
+defaultTasks 'clean', 'build', 'check', 'aggregate'
 
 buildscript {
 
@@ -15,10 +15,16 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply from: "$rootDir/gradle/libraries.gradle"
-apply from: "$rootDir/gradle/code-coverage.gradle"
+
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'net.serenity-bdd.aggregator'
+
+apply from: "$rootDir/gradle/libraries.gradle"
+//apply from: "$rootDir/gradle/code-coverage.gradle"
 
 repositories {
     jcenter()
@@ -36,7 +42,29 @@ configurations {
     integration_testCompile.extendsFrom testCompile
     integration_testRuntime.extendsFrom testRuntime
 }
+pmd {
+    ignoreFailures = false
+    ruleSets = [
+            "basic",
+            "braces",
+            "design",
+            "unused"
+    ]
+}
 
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
 allprojects {
     apply plugin: 'idea'
     idea {
