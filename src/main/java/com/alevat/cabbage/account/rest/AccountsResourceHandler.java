@@ -16,8 +16,7 @@ import java.util.List;
  */
 class AccountsResourceHandler extends AbstractResourceHandler {
 
-    @Inject
-    private AccountService service;
+    private final AccountService service;
 
     @Inject
     AccountsResourceHandler(AccountService service, @PathPrefix String pathPrefix, JsonHelper jsonHelper) {

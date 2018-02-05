@@ -24,7 +24,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'net.serenity-bdd.aggregator'
 
 apply from: "$rootDir/gradle/libraries.gradle"
-//apply from: "$rootDir/gradle/code-coverage.gradle"
+apply from: "$rootDir/gradle/code-coverage.gradle"
 
 repositories {
     jcenter()
@@ -45,14 +45,15 @@ configurations {
 pmd {
     ignoreFailures = false
     ruleSets = [
-            "basic",
-            "braces",
-            "design",
-            "unused"
+            "java-basic",
+            "java-braces",
+            "java-design",
+            "java-unusedcode"
     ]
 }
 
 tasks.withType(FindBugs) {
+    task -> enabled = gradle.startParameter.taskNames.contains(task.name)
     reports {
         xml.enabled false
         html.enabled true

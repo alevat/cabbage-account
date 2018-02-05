@@ -19,7 +19,7 @@ class TransactionsResourceHandler extends AbstractResourceHandler {
 
     private static final int ACCOUNT_ID_PATH_PARAM_INDEX = 1;
 
-    private TransactionService service;
+    private final TransactionService service;
 
     @Inject
     TransactionsResourceHandler(TransactionService service, @PathPrefix String pathPrefix, JsonHelper jsonHelper) {
