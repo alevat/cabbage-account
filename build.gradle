@@ -1,4 +1,6 @@
-defaultTasks 'clean', 'build', 'check', 'aggregate'
+defaultTasks 'clean', 'build', 'check', 'jacocoTestCoverageVerification', 'jacocoTestReport', 'aggregate'
+
+// MAIN SETUP
 
 buildscript {
 
@@ -29,57 +31,6 @@ apply from: "$rootDir/gradle/code-coverage.gradle"
 repositories {
     jcenter()
     maven {url 'https://s3-us-west-2.amazonaws.com/dynamodb-local/release'}
-}
-
-sourceSets {
-    integration_test {
-        compileClasspath += main.output + test.output
-        runtimeClasspath += main.output + test.output
-    }
-}
-
-configurations {
-    integration_testCompile.extendsFrom testCompile
-    integration_testRuntime.extendsFrom testRuntime
-}
-pmd {
-    ignoreFailures = false
-    ruleSets = [
-            "java-basic",
-            "java-braces",
-            "java-design",
-            "java-unusedcode"
-    ]
-}
-
-tasks.withType(FindBugs) {
-    task -> enabled = gradle.startParameter.taskNames.contains(task.name)
-    reports {
-        xml.enabled false
-        html.enabled true
-    }
-}
-
-tasks.withType(Checkstyle) {
-    reports {
-        xml.enabled false
-        html.enabled true
-    }
-}
-allprojects {
-    apply plugin: 'idea'
-    idea {
-        module {
-            inheritOutputDirs = false
-            outputDir = file('build/classes/main')
-            testOutputDir = file('build/classes/test')
-        }
-    }
-}
-
-task integrationTest(type: Test) {
-    testClassesDirs = sourceSets.integration_test.output.classesDirs
-    classpath = sourceSets.integration_test.runtimeClasspath
 }
 
 dependencies {
@@ -119,15 +70,7 @@ dependencies {
                 libs.test.spring.boot
 }
 
-task buildZip(type: Zip) {
-    from compileJava
-    from processResources
-    into('lib') {
-        from configurations.runtime
-    }
-}
-
-build.dependsOn buildZip
+// TEST CONFIGURATION
 
 task copyTestDependencies(type: Copy) {
     from configurations.testCompile
@@ -149,12 +92,89 @@ test.dependsOn copyTestDependencies
 gradle.startParameter.continueOnFailure = true
 
 test.finalizedBy(aggregate)
+
+// INTEGRATION TESTS
+
+sourceSets {
+    integration_test {
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
+}
+
+configurations {
+    integration_testCompile.extendsFrom testCompile
+    integration_testRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integration_test.output.classesDirs
+    classpath = sourceSets.integration_test.runtimeClasspath
+}
+
 integrationTest.finalizedBy(aggregate)
+
+// DISTRIBUTION
+
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtime
+    }
+}
+
+build.dependsOn buildZip
+
+// STATIC ANALYSIS
+
+pmd {
+    ignoreFailures = false
+    ruleSets = [
+            "java-basic",
+            "java-braces",
+            "java-design",
+            "java-unusedcode"
+    ]
+}
+
+tasks.withType(FindBugs) {
+    task -> enabled = gradle.startParameter.taskNames.contains(task.name)
+        reports {
+            xml.enabled false
+            html.enabled true
+        }
+}
+
+checkstyle {
+    configFile = file('gradle/google_checks.xml')
+    toolVersion "7.6.1"
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+// INTELLIJ IDEA
+
+allprojects {
+    apply plugin: 'idea'
+    idea {
+        module {
+            inheritOutputDirs = false
+            outputDir = file('build/classes/main')
+            testOutputDir = file('build/classes/test')
+        }
+    }
+}
 
 ext.coverage = [
         excludes: [],
         limit: [
-                line: 80,
+                line: 75,
                 branch: 45
         ]
 ]
