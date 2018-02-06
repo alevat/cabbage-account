@@ -1,14 +1,14 @@
 package com.alevat.cabbage.account.service;
 
-import com.alevat.cabbage.account.service.dto.TransactionDTO;
+import com.alevat.cabbage.account.service.dto.TransactionDto;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface TransactionService {
 
-    TransactionDTO create(UUID accountId, TransactionDTO transactionDTO);
+    TransactionDto create(UUID accountId, TransactionDto transactionDto);
 
-    List<TransactionDTO> get(UUID accountId);
+    List<TransactionDto> get(UUID accountId);
 
 }

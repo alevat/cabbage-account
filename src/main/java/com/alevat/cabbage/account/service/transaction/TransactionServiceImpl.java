@@ -2,18 +2,22 @@ package com.alevat.cabbage.account.service.transaction;
 
 import com.alevat.cabbage.account.domain.Transaction;
 import com.alevat.cabbage.account.service.TransactionService;
-import com.alevat.cabbage.account.service.dto.TransactionDTO;
+import com.alevat.cabbage.account.service.dto.TransactionDto;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
-import javax.inject.Inject;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
+import javax.inject.Inject;
 
 class TransactionServiceImpl implements TransactionService {
 
@@ -25,16 +29,16 @@ class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionDTO create(UUID accountId, TransactionDTO transactionDTO) {
+    public TransactionDto create(UUID accountId, TransactionDto transactionDto) {
         Transaction transaction = new Transaction();
         transaction.setAccountId(accountId);
-        loadFromDTO(transaction, transactionDTO);
+        loadFromDto(transaction, transactionDto);
         mapper.save(transaction);
-        return toDTO(transaction);
+        return toDto(transaction);
     }
 
     @Override
-    public List<TransactionDTO> get(UUID accountId) {
+    public List<TransactionDto> get(UUID accountId) {
         Map<String, AttributeValue> values = new HashMap<>();
         values.put(":accountId", new AttributeValue().withS(accountId.toString()));
         Map<String, String> names = new HashMap<>();
@@ -44,24 +48,24 @@ class TransactionServiceImpl implements TransactionService {
                 .withExpressionAttributeNames(names)
                 .withExpressionAttributeValues(values);
         PaginatedQueryList<Transaction> result = mapper.query(Transaction.class, query);
-        return result.stream().map(TransactionServiceImpl::toDTO).collect(Collectors.toList());
+        return result.stream().map(TransactionServiceImpl::toDto).collect(Collectors.toList());
     }
 
-    private static void loadFromDTO(Transaction transaction, TransactionDTO transactionDTO) {
-        transaction.setAmount(transactionDTO.getAmount());
-        Date timestampDate = Date.from(transactionDTO.getTimestamp().toInstant());
+    private static void loadFromDto(Transaction transaction, TransactionDto transactionDto) {
+        transaction.setAmount(transactionDto.getAmount());
+        Date timestampDate = Date.from(transactionDto.getTimestamp().toInstant());
         transaction.setTimestamp(timestampDate);
-        transaction.setType(transactionDTO.getType());
+        transaction.setType(transactionDto.getType());
     }
 
-    private static TransactionDTO toDTO(Transaction transaction) {
-        TransactionDTO transactionDTO = new TransactionDTO();
-        transactionDTO.setId(transaction.getId());
-        transactionDTO.setAmount(transaction.getAmount());
-        transactionDTO.setType(transaction.getType());
+    private static TransactionDto toDto(Transaction transaction) {
+        TransactionDto transactionDto = new TransactionDto();
+        transactionDto.setId(transaction.getId());
+        transactionDto.setAmount(transaction.getAmount());
+        transactionDto.setType(transaction.getType());
         Instant timestampInstant = transaction.getTimestamp().toInstant();
-        transactionDTO.setTimestamp(OffsetDateTime.ofInstant(timestampInstant, ZoneId.systemDefault()));
-        return transactionDTO;
+        transactionDto.setTimestamp(OffsetDateTime.ofInstant(timestampInstant, ZoneId.systemDefault()));
+        return transactionDto;
     }
 
 }

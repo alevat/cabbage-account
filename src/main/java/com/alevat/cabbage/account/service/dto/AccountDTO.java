@@ -43,8 +43,8 @@ public class AccountDTO {
             return false;
         }
         AccountDTO that = (AccountDTO) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name);
+        return Objects.equals(id, that.id)
+                && Objects.equals(name, that.name);
     }
 
     @Override

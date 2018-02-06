@@ -1,11 +1,9 @@
 package com.alevat.cabbage.account.bdd.screenplay.tasks
 
-import com.alevat.cabbage.account.service.dto.TransactionDTO
+import com.alevat.cabbage.account.service.dto.TransactionDto
 import com.alevat.cabbage.account.service.dto.TransactionType
-import com.alevat.serenitybdd.screenplay.Performables
 import com.alevat.serenitybdd.screenplay.rest.actions.Post
 import net.serenitybdd.screenplay.Actor
-import net.serenitybdd.screenplay.GivenWhenThen
 import net.serenitybdd.screenplay.Performable
 import net.serenitybdd.screenplay.Task
 import net.thucydides.core.annotations.Step
@@ -15,7 +13,6 @@ import org.apache.http.HttpStatus
 import java.time.OffsetDateTime
 
 import static com.alevat.serenitybdd.screenplay.Performables.and
-import static net.serenitybdd.screenplay.GivenWhenThen.then
 import static net.serenitybdd.screenplay.Tasks.instrumented
 
 class PostATransaction implements Task {
@@ -25,7 +22,7 @@ class PostATransaction implements Task {
 
     private String accountId
 
-    private TransactionDTO transactionDetails = new TransactionDTO()
+    private TransactionDto transactionDetails = new TransactionDto()
 
     PostATransaction withAmount(BigDecimal amount) {
         transactionDetails.amount = amount.abs();
