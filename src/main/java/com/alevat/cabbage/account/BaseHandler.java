@@ -1,7 +1,7 @@
 package com.alevat.cabbage.account;
 
 import com.alevat.cabbage.account.config.ConfigurationModule;
-import com.alevat.cabbage.account.config.DynamoDBModule;
+import com.alevat.cabbage.account.config.DynamoDbModule;
 import com.alevat.cabbage.account.rest.RequestHandlerModule;
 import com.alevat.cabbage.account.service.account.AccountServiceModule;
 import com.alevat.cabbage.account.service.transaction.TransactionServiceModule;
@@ -23,7 +23,7 @@ public class BaseHandler implements RequestHandler<APIGatewayProxyRequestEvent, 
                 new RequestHandlerModule(),
                 new AccountServiceModule(),
                 new TransactionServiceModule(),
-                new DynamoDBModule(),
+                new DynamoDbModule(),
                 new ConfigurationModule());
         injector.injectMembers(this);
     }

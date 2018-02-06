@@ -5,12 +5,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig.Table
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-class DynamoDBMapperConfigProvider implements Provider<DynamoDBMapperConfig> {
+class DynamoDbMapperConfigProvider implements Provider<DynamoDBMapperConfig> {
 
     private final String stage;
 
     @Inject
-    DynamoDBMapperConfigProvider(@Stage String stage) {
+    DynamoDbMapperConfigProvider(@Stage String stage) {
         this.stage = stage;
     }
 

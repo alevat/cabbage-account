@@ -2,7 +2,7 @@ package com.alevat.cabbage.account.service.account;
 
 import com.alevat.cabbage.account.domain.Account;
 import com.alevat.cabbage.account.service.AccountService;
-import com.alevat.cabbage.account.service.dto.AccountDTO;
+import com.alevat.cabbage.account.service.dto.AccountDto;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
@@ -17,23 +17,23 @@ class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDTO create(AccountDTO accountDTO) {
-        Account account = fromDTO(accountDTO);
+    public AccountDto create(AccountDto accountDto) {
+        Account account = fromDto(accountDto);
         mapper.save(account);
-        return toDTO(account);
+        return toDto(account);
     }
 
-    private Account fromDTO(AccountDTO accountDTO) {
+    private Account fromDto(AccountDto accountDto) {
         Account account = new Account();
-        account.setName(accountDTO.getName());
+        account.setName(accountDto.getName());
         return account;
     }
 
-    private AccountDTO toDTO(Account account) {
-        AccountDTO accountDTO = new AccountDTO();
-        accountDTO.setId(account.getId());
-        accountDTO.setName(account.getName());
-        return accountDTO;
+    private AccountDto toDto(Account account) {
+        AccountDto accountDto = new AccountDto();
+        accountDto.setId(account.getId());
+        accountDto.setName(account.getName());
+        return accountDto;
     }
 
 }

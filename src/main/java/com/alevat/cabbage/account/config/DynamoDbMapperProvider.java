@@ -11,13 +11,13 @@ import com.amazonaws.services.dynamodbv2.util.TableUtils;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-class DynamoDBMapperProvider implements Provider<DynamoDBMapper> {
+class DynamoDbMapperProvider implements Provider<DynamoDBMapper> {
 
     private final AmazonDynamoDB dynamoDB;
     private final DynamoDBMapperConfig config;
 
     @Inject
-    DynamoDBMapperProvider(AmazonDynamoDB dynamoDB, DynamoDBMapperConfig config) {
+    DynamoDbMapperProvider(AmazonDynamoDB dynamoDB, DynamoDBMapperConfig config) {
         this.dynamoDB = dynamoDB;
         this.config = config;
     }

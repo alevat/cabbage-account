@@ -5,7 +5,7 @@ import com.google.common.base.MoreObjects;
 import java.util.Objects;
 import java.util.UUID;
 
-public class AccountDTO {
+public class AccountDto {
 
     private UUID id;
     private String name;
@@ -42,7 +42,7 @@ public class AccountDTO {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AccountDTO that = (AccountDTO) o;
+        AccountDto that = (AccountDto) o;
         return Objects.equals(id, that.id)
                 && Objects.equals(name, that.name);
     }

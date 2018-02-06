@@ -147,8 +147,10 @@ tasks.withType(FindBugs) {
 }
 
 checkstyle {
-    configFile = file('gradle/google_checks.xml')
+    configFile = file('gradle/checkstyle/google_checks.xml')
     toolVersion "7.6.1"
+    ignoreFailures = false
+    maxWarnings = 0
 }
 
 tasks.withType(Checkstyle) {

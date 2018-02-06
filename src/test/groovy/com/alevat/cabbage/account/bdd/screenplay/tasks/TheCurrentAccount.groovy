@@ -1,6 +1,6 @@
 package com.alevat.cabbage.account.bdd.screenplay.tasks
 
-import com.alevat.cabbage.account.service.dto.AccountDTO
+import com.alevat.cabbage.account.service.dto.AccountDto
 import com.alevat.cabbage.account.service.dto.TransactionDto
 import com.alevat.serenitybdd.screenplay.rest.actions.Get
 import com.alevat.serenitybdd.screenplay.rest.actions.RestInvocation
@@ -16,7 +16,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented
 class TheCurrentAccount implements Interaction {
 
     @Delegate
-    private static AccountDTO account
+    private static AccountDto account
 
     static boolean exists() {
         return account != null
@@ -52,7 +52,7 @@ class TheCurrentAccount implements Interaction {
     @Override
     @Step("{0} extracts the account from the current REST response body")
     <T extends Actor> void performAs(T actor) {
-        account = RestInvocation.getResultAs(AccountDTO)
+        account = RestInvocation.getResultAs(AccountDto)
     }
 
 }

@@ -2,7 +2,7 @@ package com.alevat.cabbage.account.rest;
 
 import com.alevat.cabbage.account.config.PathPrefix;
 import com.alevat.cabbage.account.service.AccountService;
-import com.alevat.cabbage.account.service.dto.AccountDTO;
+import com.alevat.cabbage.account.service.dto.AccountDto;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
@@ -32,7 +32,7 @@ class AccountsResourceHandler extends AbstractResourceHandler {
 
     @Override
     APIGatewayProxyResponseEvent doPost(APIGatewayProxyRequestEvent requestEvent, Context context) {
-        AccountDTO account = getFromBody(requestEvent, AccountDTO.class);
+        AccountDto account = getFromBody(requestEvent, AccountDto.class);
         account = service.create(account);
         return buildResponse(account, HttpStatus.SC_CREATED);
     }
