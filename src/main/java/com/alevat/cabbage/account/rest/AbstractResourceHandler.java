@@ -1,5 +1,7 @@
 package com.alevat.cabbage.account.rest;
 
+import java.util.List;
+
 import com.alevat.cabbage.account.config.PathPrefix;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
@@ -7,8 +9,6 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.google.common.base.Splitter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.List;
 
 abstract class AbstractResourceHandler implements ResourceHandler {
 
