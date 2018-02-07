@@ -84,14 +84,6 @@ jacocoTestReport {
     }
 }
 
-//test {
-//    jacoco {
-//        append = false
-//        classDumpDir = file("$buildDir/jacoco/classpathdumps")
-//    }
-//    finalizedBy jacocoTestReport
-//}
-
 jacocoTestReport {
     reports {
         html.destination file("${reportsDir}/jacoco/html")
