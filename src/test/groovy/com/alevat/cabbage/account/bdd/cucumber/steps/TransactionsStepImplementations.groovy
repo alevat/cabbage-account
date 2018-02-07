@@ -14,7 +14,7 @@ class TransactionsStepImplementations {
 
     static final String TEST_ACCOUNT_NAME = "test-account"
 
-    def theClient = Actor.named("AccountDTO microservice REST client")
+    def theClient = Actor.named("AccountDto microservice REST client")
 
     @Steps(shared = true)
     private TheCurrentAccount theCurrentAccount

@@ -1,10 +1,10 @@
 package com.alevat.cabbage.account.rest;
 
+import java.io.IOException;
+import javax.inject.Inject;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import javax.inject.Inject;
-import java.io.IOException;
 
 class JsonHelper {
 

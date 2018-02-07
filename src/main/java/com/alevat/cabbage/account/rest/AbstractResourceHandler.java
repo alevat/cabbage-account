@@ -1,16 +1,14 @@
 package com.alevat.cabbage.account.rest;
 
+import java.util.List;
+
 import com.alevat.cabbage.account.config.PathPrefix;
-import com.alevat.cabbage.account.config.Stage;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.google.common.base.Splitter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.inject.Inject;
-import java.util.List;
 
 abstract class AbstractResourceHandler implements ResourceHandler {
 
@@ -30,6 +28,8 @@ abstract class AbstractResourceHandler implements ResourceHandler {
         return isHandlerFor(pathElements);
     }
 
+    abstract boolean isHandlerFor(List<String> pathElements);
+
     List<String> getResourcePathElements(APIGatewayProxyRequestEvent requestEvent) {
         String resourcePath = getResourcePath(requestEvent);
         return Splitter.on('/').omitEmptyStrings().splitToList(resourcePath);
@@ -39,8 +39,6 @@ abstract class AbstractResourceHandler implements ResourceHandler {
         String path = requestEvent.getPath();
         return path.replaceFirst(pathPrefix, "");
     }
-
-    abstract boolean isHandlerFor(List<String> pathElements);
 
     public final APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent requestEvent, Context context) {
         String method = requestEvent.getHttpMethod();
@@ -55,14 +53,14 @@ abstract class AbstractResourceHandler implements ResourceHandler {
     }
 
     /**
-     * Override to handle method
+     * Override to handle method.
      */
     APIGatewayProxyResponseEvent doPost(APIGatewayProxyRequestEvent requestEvent, Context context) {
         throw noHandlerException(requestEvent);
     }
 
     /**
-     * Override to handle method
+     * Override to handle method.
      */
     APIGatewayProxyResponseEvent doGet(APIGatewayProxyRequestEvent requestEvent, Context context) {
         throw noHandlerException(requestEvent);

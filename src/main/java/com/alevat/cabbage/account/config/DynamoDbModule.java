@@ -6,12 +6,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 
-public class DynamoDBModule extends AbstractModule {
+public class DynamoDbModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(AmazonDynamoDB.class).toProvider(AmazonDynamoDBProvider.class).in(Singleton.class);
-        bind(DynamoDBMapperConfig.class).toProvider(DynamoDBMapperConfigProvider.class).in(Singleton.class);
-        bind(DynamoDBMapper.class).toProvider(DynamoDBMapperProvider.class).in(Singleton.class);
+        bind(AmazonDynamoDB.class).toProvider(AmazonDynamoDbProvider.class).in(Singleton.class);
+        bind(DynamoDBMapperConfig.class).toProvider(DynamoDbMapperConfigProvider.class).in(Singleton.class);
+        bind(DynamoDBMapper.class).toProvider(DynamoDbMapperProvider.class).in(Singleton.class);
     }
 }

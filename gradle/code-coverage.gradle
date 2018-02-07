@@ -83,15 +83,6 @@ jacocoTestReport {
         }
     }
 }
-check.dependsOn jacocoTestReport
-
-test {
-    jacoco {
-        append = false
-        classDumpDir = file("$buildDir/jacoco/classpathdumps")
-    }
-    finalizedBy jacocoTestReport
-}
 
 jacocoTestReport {
     reports {

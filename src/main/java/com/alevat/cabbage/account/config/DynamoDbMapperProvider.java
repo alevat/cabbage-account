@@ -11,36 +11,36 @@ import com.amazonaws.services.dynamodbv2.util.TableUtils;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-class DynamoDBMapperProvider implements Provider<DynamoDBMapper> {
+class DynamoDbMapperProvider implements Provider<DynamoDBMapper> {
 
-    private final AmazonDynamoDB dynamoDB;
+    private final AmazonDynamoDB dynamoDb;
     private final DynamoDBMapperConfig config;
 
     @Inject
-    DynamoDBMapperProvider(AmazonDynamoDB dynamoDB, DynamoDBMapperConfig config) {
-        this.dynamoDB = dynamoDB;
+    DynamoDbMapperProvider(AmazonDynamoDB dynamoDb, DynamoDBMapperConfig config) {
+        this.dynamoDb = dynamoDb;
         this.config = config;
     }
 
     @Override
     public DynamoDBMapper get() {
-        DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB, config);
+        DynamoDBMapper mapper = new DynamoDBMapper(dynamoDb, config);
         try {
-            createTables(dynamoDB, mapper, config);
+            createTables(dynamoDb, mapper, config);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return mapper;
     }
 
-    private void createTables(AmazonDynamoDB dynamoDB,
+    private void createTables(AmazonDynamoDB dynamoDb,
                               DynamoDBMapper mapper,
                               DynamoDBMapperConfig config) throws InterruptedException {
-        createTable(dynamoDB, mapper, config, Account.class);
-        createTable(dynamoDB, mapper, config, Transaction.class);
+        createTable(dynamoDb, mapper, config, Account.class);
+        createTable(dynamoDb, mapper, config, Transaction.class);
     }
 
-    private void createTable(AmazonDynamoDB dynamoDB,
+    private void createTable(AmazonDynamoDB dynamoDb,
                              DynamoDBMapper mapper,
                              DynamoDBMapperConfig config,
                              Class<?> tableClass) throws InterruptedException {
@@ -49,8 +49,8 @@ class DynamoDBMapperProvider implements Provider<DynamoDBMapper> {
                 .withReadCapacityUnits(5L)
                 .withWriteCapacityUnits(5L);
         createRequest.setProvisionedThroughput(throughput);
-        TableUtils.createTableIfNotExists(dynamoDB, createRequest);
-        TableUtils.waitUntilActive(dynamoDB, createRequest.getTableName());
+        TableUtils.createTableIfNotExists(dynamoDb, createRequest);
+        TableUtils.waitUntilActive(dynamoDb, createRequest.getTableName());
     }
 
 }

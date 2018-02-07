@@ -1,7 +1,7 @@
 package com.alevat.cabbage.account.bdd.screenplay.tasks
 
-import com.alevat.cabbage.account.service.dto.AccountDTO
-import com.alevat.cabbage.account.service.dto.TransactionDTO
+import com.alevat.cabbage.account.service.dto.AccountDto
+import com.alevat.cabbage.account.service.dto.TransactionDto
 import com.alevat.serenitybdd.screenplay.rest.actions.Get
 import com.alevat.serenitybdd.screenplay.rest.actions.RestInvocation
 import net.serenitybdd.screenplay.Actor
@@ -16,7 +16,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented
 class TheCurrentAccount implements Interaction {
 
     @Delegate
-    private static AccountDTO account
+    private static AccountDto account
 
     static boolean exists() {
         return account != null
@@ -36,15 +36,15 @@ class TheCurrentAccount implements Interaction {
         };
     }
 
-    static Question<List<TransactionDTO>> ledger() {
-        return new Question<List<TransactionDTO>>() {
+    static Question<List<TransactionDto>> ledger() {
+        return new Question<List<TransactionDto>>() {
             @Override
             @Subject("the transaction ledger")
-            List<TransactionDTO> answeredBy(Actor actor) {
+            List<TransactionDto> answeredBy(Actor actor) {
                 Get.fromPath("/accounts/" + account.id + "/transactions")
                         .withExpectedStatusCode(HttpStatus.SC_OK)
                         .call()
-                return Get.getResultAsListOf(TransactionDTO);
+                return Get.getResultAsListOf(TransactionDto);
             }
         }
     }
@@ -52,7 +52,7 @@ class TheCurrentAccount implements Interaction {
     @Override
     @Step("{0} extracts the account from the current REST response body")
     <T extends Actor> void performAs(T actor) {
-        account = RestInvocation.getResultAs(AccountDTO)
+        account = RestInvocation.getResultAs(AccountDto)
     }
 
 }

@@ -1,5 +1,8 @@
 package com.alevat.cabbage.account.rest;
 
+import java.util.Set;
+import javax.inject.Inject;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
@@ -7,9 +10,6 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.inject.Inject;
-import java.util.Set;
 
 import static com.alevat.cabbage.account.rest.AbstractResourceHandler.noHandlerException;
 

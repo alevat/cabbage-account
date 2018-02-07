@@ -1,14 +1,14 @@
 package com.alevat.cabbage.account.service.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.google.common.base.MoreObjects;
-
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-public class TransactionDTO {
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.common.base.MoreObjects;
+
+public class TransactionDto {
 
     private UUID id;
 
@@ -63,16 +63,20 @@ public class TransactionDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TransactionDTO that = (TransactionDTO) o;
-        return Objects.equals(id, that.id) &&
-                type == that.type &&
-                areAmountsEqual(that) &&
-                Objects.equals(timestamp, that.timestamp);
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        TransactionDto that = (TransactionDto) o;
+        return Objects.equals(id, that.id)
+                && type == that.type
+                && areAmountsEqual(that)
+                && Objects.equals(timestamp, that.timestamp);
     }
 
-    private boolean areAmountsEqual(TransactionDTO that) {
+    private boolean areAmountsEqual(TransactionDto that) {
         if (amount == null || that.amount == null) {
             return amount == that.amount;
         } else {

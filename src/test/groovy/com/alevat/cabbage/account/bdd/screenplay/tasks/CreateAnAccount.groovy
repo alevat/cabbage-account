@@ -1,6 +1,6 @@
 package com.alevat.cabbage.account.bdd.screenplay.tasks
 
-import com.alevat.cabbage.account.service.dto.AccountDTO
+import com.alevat.cabbage.account.service.dto.AccountDto
 import com.alevat.serenitybdd.screenplay.rest.actions.Post
 import net.serenitybdd.screenplay.Actor
 import net.serenitybdd.screenplay.Task
@@ -33,7 +33,7 @@ class CreateAnAccount implements Task {
     }
 
     private Post postToTheCreateEndpoint() {
-        AccountDTO account = new AccountDTO()
+        AccountDto account = new AccountDto()
         account.name = theRequestedName
         Post.toPath("/accounts")
                 .withBody(account)

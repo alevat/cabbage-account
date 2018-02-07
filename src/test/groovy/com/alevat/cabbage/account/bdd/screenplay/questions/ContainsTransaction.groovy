@@ -1,20 +1,20 @@
 package com.alevat.cabbage.account.bdd.screenplay.questions
 
-import com.alevat.cabbage.account.service.dto.TransactionDTO
+import com.alevat.cabbage.account.service.dto.TransactionDto
 import org.hamcrest.BaseMatcher
 import org.hamcrest.Description
 
-class ContainsTransaction extends BaseMatcher<TransactionDTO> {
+class ContainsTransaction extends BaseMatcher<TransactionDto> {
 
-    private final TransactionDTO transactionToFind
+    private final TransactionDto transactionToFind
 
-    ContainsTransaction(TransactionDTO transactionToFind) {
+    ContainsTransaction(TransactionDto transactionToFind) {
         this.transactionToFind = transactionToFind
     }
 
     @Override
     boolean matches(Object item) {
-        List<TransactionDTO> transactions = item
+        List<TransactionDto> transactions = item
         return transactions.contains(transactionToFind)
     }
 

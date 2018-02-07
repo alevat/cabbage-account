@@ -1,16 +1,16 @@
 package com.alevat.cabbage.account.rest;
 
+import java.util.List;
+import java.util.UUID;
+import javax.inject.Inject;
+
 import com.alevat.cabbage.account.config.PathPrefix;
 import com.alevat.cabbage.account.service.TransactionService;
-import com.alevat.cabbage.account.service.dto.TransactionDTO;
+import com.alevat.cabbage.account.service.dto.TransactionDto;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import org.apache.http.HttpStatus;
-
-import javax.inject.Inject;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Handler for /accounts/${accountId}/transactions
@@ -19,7 +19,7 @@ class TransactionsResourceHandler extends AbstractResourceHandler {
 
     private static final int ACCOUNT_ID_PATH_PARAM_INDEX = 1;
 
-    private TransactionService service;
+    private final TransactionService service;
 
     @Inject
     TransactionsResourceHandler(TransactionService service, @PathPrefix String pathPrefix, JsonHelper jsonHelper) {
@@ -36,14 +36,14 @@ class TransactionsResourceHandler extends AbstractResourceHandler {
 
     @Override
     APIGatewayProxyResponseEvent doPost(APIGatewayProxyRequestEvent requestEvent, Context context) {
-        TransactionDTO transactionDTO = getFromBody(requestEvent, TransactionDTO.class);
-        transactionDTO = service.create(getAccountId(requestEvent), transactionDTO);
-        return buildResponse(transactionDTO, HttpStatus.SC_CREATED);
+        TransactionDto transactionDto = getFromBody(requestEvent, TransactionDto.class);
+        transactionDto = service.create(getAccountId(requestEvent), transactionDto);
+        return buildResponse(transactionDto, HttpStatus.SC_CREATED);
     }
 
     @Override
     APIGatewayProxyResponseEvent doGet(APIGatewayProxyRequestEvent requestEvent, Context context) {
-        List<TransactionDTO> transactions = service.get(getAccountId(requestEvent));
+        List<TransactionDto> transactions = service.get(getAccountId(requestEvent));
         return buildResponse(transactions, HttpStatus.SC_OK);
     }
 
