@@ -53,14 +53,14 @@ abstract class AbstractResourceHandler implements ResourceHandler {
     }
 
     /**
-     * Override to handle method
+     * Override to handle method.
      */
     APIGatewayProxyResponseEvent doPost(APIGatewayProxyRequestEvent requestEvent, Context context) {
         throw noHandlerException(requestEvent);
     }
 
     /**
-     * Override to handle method
+     * Override to handle method.
      */
     APIGatewayProxyResponseEvent doGet(APIGatewayProxyRequestEvent requestEvent, Context context) {
         throw noHandlerException(requestEvent);

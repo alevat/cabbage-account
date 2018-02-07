@@ -1,11 +1,11 @@
 package com.alevat.cabbage.account.service.account;
 
+import javax.inject.Inject;
+
 import com.alevat.cabbage.account.domain.Account;
 import com.alevat.cabbage.account.service.AccountService;
 import com.alevat.cabbage.account.service.dto.AccountDto;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-
-import javax.inject.Inject;
 
 class AccountServiceImpl implements AccountService {
 

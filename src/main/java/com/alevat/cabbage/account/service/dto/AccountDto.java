@@ -1,9 +1,9 @@
 package com.alevat.cabbage.account.service.dto;
 
-import com.google.common.base.MoreObjects;
-
 import java.util.Objects;
 import java.util.UUID;
+
+import com.google.common.base.MoreObjects;
 
 public class AccountDto {
 

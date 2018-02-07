@@ -166,7 +166,7 @@
     <module name="CustomImportOrder">
       <property name="sortImportsInGroupAlphabetically" value="true"/>
       <property name="separateLineBetweenGroups" value="true"/>
-      <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
+      <property name="customImportOrderRules" value="STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###STATIC"/>
     </module>
     <module name="MethodParamPad"/>
     <module name="ParenPad"/>
@@ -185,9 +185,6 @@
     </module>
     <module name="NonEmptyAtclauseDescription"/>
     <module name="JavadocTagContinuationIndentation"/>
-    <module name="SummaryJavadoc">
-      <property name="forbiddenSummaryFragments" value="^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )"/>
-    </module>
     <module name="JavadocParagraph"/>
     <module name="AtclauseOrder">
       <property name="tagOrder" value="@param, @return, @throws, @deprecated"/>
