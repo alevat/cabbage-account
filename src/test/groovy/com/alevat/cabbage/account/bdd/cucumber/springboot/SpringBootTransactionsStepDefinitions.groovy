@@ -22,7 +22,6 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 class SpringBootTransactionsStepDefinitions {
 
     @Steps
-    @Delegate
     TransactionsStepImplementations implementations
 
     @Inject
