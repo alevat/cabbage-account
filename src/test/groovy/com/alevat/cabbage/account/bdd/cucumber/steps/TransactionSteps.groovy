@@ -10,7 +10,7 @@ import net.thucydides.core.annotations.Steps
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat
 import static org.hamcrest.core.IsCollectionContaining.hasItem
 
-class TransactionsStepDefinitions {
+class TransactionSteps {
 
     static final String TEST_ACCOUNT_NAME = "test-account"
 

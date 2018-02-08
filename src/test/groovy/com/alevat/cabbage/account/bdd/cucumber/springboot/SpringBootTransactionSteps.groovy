@@ -1,7 +1,7 @@
 package com.alevat.cabbage.account.bdd.cucumber.springboot
 
 import com.alevat.aws.lambda.test.SpringBootLambdaProxy
-import com.alevat.cabbage.account.bdd.cucumber.steps.TransactionsStepDefinitions
+import com.alevat.cabbage.account.bdd.cucumber.steps.TransactionSteps
 import cucumber.api.java.Before
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
@@ -17,7 +17,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = RANDOM_PORT, classes = SpringBootLambdaProxy)
 @ContextConfiguration(classes = [SpringBootTestConfiguration])
-class SpringBootTransactionsStepDefinitions extends TransactionsStepDefinitions {
+class SpringBootTransactionSteps extends TransactionSteps {
 
     @Inject
     @LocalServerPort
@@ -28,19 +28,16 @@ class SpringBootTransactionsStepDefinitions extends TransactionsStepDefinitions 
         RestAssured.baseURI = "http://localhost:" + serverPort +"/v1"
     }
 
-    @Override
     @Given("^I have an account")
     def iHaveAnAccount()  {
         super.iHaveAnAccount()
     }
 
-    @Override
     @When("^I post a transaction to an account with the amount (.*)")
     def iPostATransactionWith(BigDecimal amount) {
         super.iPostATransactionWith(amount)
     }
 
-    @Override
     @Then("^the transaction should be listed in the account's ledger")
     def theTransactionShouldBeListed() {
         super.theTransactionShouldBeListed()
