@@ -16,11 +16,9 @@ class Get extends RestInvocation {
 
     @Override
     ValidatableResponse call() {
-        configureRequest()
-        .when()
-            .get(path)
-        .then()
-            .statusCode(expectedStatusCode)
+        checkResponse(
+            configureRequest().when().get(path)
+        )
     }
 
     @Override

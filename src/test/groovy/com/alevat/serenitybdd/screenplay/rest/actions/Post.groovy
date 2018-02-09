@@ -25,12 +25,11 @@ class Post extends RestInvocation {
 
     @Override
     ValidatableResponse call() {
-        configureRequest()
-            .body(body)
-        .when()
-            .post(path)
-        .then()
-            .statusCode(expectedStatusCode)
+        def response = configureRequest()
+                .body(body)
+            .when()
+                .post(path)
+        checkResponse(response)
     }
 
     @Override
