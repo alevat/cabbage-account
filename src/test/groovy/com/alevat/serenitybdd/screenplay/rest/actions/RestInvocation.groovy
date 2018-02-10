@@ -3,6 +3,7 @@ package com.alevat.serenitybdd.screenplay.rest.actions
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.restassured.http.ContentType
+import io.restassured.response.Response
 import io.restassured.response.ResponseBodyExtractionOptions
 import io.restassured.response.ValidatableResponse
 import io.restassured.specification.RequestSpecification
@@ -18,7 +19,7 @@ abstract class RestInvocation implements Interaction {
 
     String path
     Map<String, String> queryParameters = new HashMap()
-    int expectedStatusCode = HttpStatus.SC_OK
+    Integer expectedStatusCode = null
     ContentType contentType = ContentType.JSON
     private static ObjectMapper objectMapper;
 
@@ -82,5 +83,11 @@ abstract class RestInvocation implements Interaction {
             .queryParams(queryParameters);
     }
 
-
+    ValidatableResponse checkResponse(Response response) {
+        if (expectedStatusCode != null)
+        {
+            response.then().statusCode(expectedStatusCode)
+        }
+        return response.then()
+    }
 }
