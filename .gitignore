@@ -1,6 +1,6 @@
 # IntelliJ IDEA
+*.iml
 /.idea/
-/cabbage-main.iml
 /out
 
 # Gradle
