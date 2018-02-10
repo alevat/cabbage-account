@@ -9,8 +9,7 @@ class AmazonDynamoDbProvider implements Provider<AmazonDynamoDB> {
 
     @Override
     public AmazonDynamoDB get() {
-        // Refactor to remove explict region
-        return AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
+        return AmazonDynamoDBClientBuilder.standard().build();
     }
 
 }
