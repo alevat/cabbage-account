@@ -14,6 +14,8 @@ import static org.hamcrest.Matchers.is
 
 class CreateAnAccount implements Task {
 
+    private static final INVALID_ACCOUNT_JSON = '{"notValidAccountJson": ""}'
+
     private String theRequestedName
 
     CreateAnAccount withAccountName(accountName) {
@@ -46,6 +48,15 @@ class CreateAnAccount implements Task {
 
     static CreateAnAccount named(accountName) {
         return instrumented(CreateAnAccount).withAccountName(accountName)
+    }
+
+    static Task withInvalidJson() {
+        Task.where(
+                "{0} creates an account with invalid JSON",
+                Post
+                    .toPath("/accounts")
+                    .withBody(INVALID_ACCOUNT_JSON)
+        )
     }
 
 }
