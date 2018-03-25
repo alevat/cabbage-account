@@ -21,6 +21,7 @@ public class RequestHandlerModule extends AbstractModule {
         Multibinder<ResourceHandler> multibinder = Multibinder.newSetBinder(binder(), ResourceHandler.class);
         multibinder.addBinding().to(AccountsResourceHandler.class).in(Singleton.class);
         multibinder.addBinding().to(TransactionsResourceHandler.class).in(Singleton.class);
+        multibinder.addBinding().to(TransactionsImportResourceHandler.class).in(Singleton.class);
     }
 
     private ObjectMapper getObjectMapper() {

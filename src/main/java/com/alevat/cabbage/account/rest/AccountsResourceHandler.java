@@ -1,6 +1,5 @@
 package com.alevat.cabbage.account.rest;
 
-import java.util.List;
 import javax.inject.Inject;
 
 import com.alevat.cabbage.account.config.PathPrefix;
@@ -11,9 +10,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import org.apache.http.HttpStatus;
 
-/**
- * Handler for /accounts[/${accountId}]
- */
+@ResourcePath("/accounts")
 class AccountsResourceHandler extends AbstractResourceHandler {
 
     private final AccountService service;
@@ -22,12 +19,6 @@ class AccountsResourceHandler extends AbstractResourceHandler {
     AccountsResourceHandler(AccountService service, @PathPrefix String pathPrefix, JsonHelper jsonHelper) {
         super(pathPrefix, jsonHelper);
         this.service = service;
-    }
-
-    @Override
-    boolean isHandlerFor(List<String> pathElements) {
-        return (pathElements.size() == 1 && pathElements.get(0).equals("accounts"))
-                || (pathElements.size() == 2 && pathElements.get(0).equals("accounts"));
     }
 
     @Override

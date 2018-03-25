@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 abstract class AbstractResourceHandler implements ResourceHandler {
 
     private static final Logger LOG = LogManager.getLogger(AbstractResourceHandler.class);
+    private static final String WILDCARD_PATH_ELEMENT = "*";
 
     private final String pathPrefix;
 
@@ -24,18 +25,44 @@ abstract class AbstractResourceHandler implements ResourceHandler {
     }
 
     public final boolean isHandlerFor(APIGatewayProxyRequestEvent requestEvent) {
-        List<String> pathElements = getResourcePathElements(requestEvent);
+        List<String> pathElements = getRequestPathElements(requestEvent);
         return isHandlerFor(pathElements);
     }
 
-    abstract boolean isHandlerFor(List<String> pathElements);
+    final boolean isHandlerFor(List<String> pathElements) {
+        List<String> handlerPathElements = getHandlerPathElements();
+        if (pathElements.size() != handlerPathElements.size()) {
+            return false;
+        }
+        for (int i = 0; i < handlerPathElements.size(); i++) {
+            String handlerPathElement = handlerPathElements.get(i);
+            String pathElement = pathElements.get(i);
+            if (!isWildcard(handlerPathElement) && !handlerPathElement.equals(pathElement))     {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    List<String> getResourcePathElements(APIGatewayProxyRequestEvent requestEvent) {
-        String resourcePath = getResourcePath(requestEvent);
+    private List<String> getHandlerPathElements() {
+        String handlerPath = getClass().getAnnotation(ResourcePath.class).value();
+        return splitPath(handlerPath);
+    }
+
+    private boolean isWildcard(String handlerPathElement) {
+        return WILDCARD_PATH_ELEMENT.equals(handlerPathElement);
+    }
+
+    List<String> getRequestPathElements(APIGatewayProxyRequestEvent requestEvent) {
+        String resourcePath = getRequestPath(requestEvent);
+        return splitPath(resourcePath);
+    }
+
+    private List<String> splitPath(String resourcePath) {
         return Splitter.on('/').omitEmptyStrings().splitToList(resourcePath);
     }
 
-    private String getResourcePath(APIGatewayProxyRequestEvent requestEvent) {
+    private String getRequestPath(APIGatewayProxyRequestEvent requestEvent) {
         String path = requestEvent.getPath();
         return path.replaceFirst(pathPrefix, "");
     }
@@ -79,6 +106,11 @@ abstract class AbstractResourceHandler implements ResourceHandler {
             throw new InvalidRequestException("Request body was empty");
         }
         return jsonHelper.fromJson(type, json);
+    }
+
+    APIGatewayProxyResponseEvent buildResponse(int httpStatusCode) {
+        return new APIGatewayProxyResponseEvent()
+                .withStatusCode(httpStatusCode);
     }
 
     APIGatewayProxyResponseEvent buildResponse(Object body, int httpStatusCode) {

@@ -7,6 +7,7 @@ import net.serenitybdd.screenplay.Task
 import net.thucydides.core.annotations.Step
 import net.thucydides.core.annotations.Steps
 import org.apache.commons.io.FileUtils
+import org.apache.http.HttpStatus
 
 import java.nio.charset.Charset
 
@@ -14,7 +15,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented
 
 class ImportATransactionFile implements Task {
 
-    private ImportFormat format
+    ImportFormat format
     private File location
     private UUID accountId
 
@@ -39,11 +40,12 @@ class ImportATransactionFile implements Task {
 
     @Override
     @Step("{0} posts a transaction to the account named #theCurrentAccount.name")
-    def <T extends Actor> void performAs(T theRestClient) {
+    <T extends Actor> void performAs(T theRestClient) {
         theRestClient.wasAbleTo(
                 Post
                     .toPath(createImportPath())
                     .withBody(getImportFileContents())
+                    .withExpectedStatusCode(HttpStatus.SC_OK)
         )
     }
 
